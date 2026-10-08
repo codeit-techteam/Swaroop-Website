@@ -1,4 +1,5 @@
-import { CircleCheck } from "lucide-react";
+import Link from "next/link";
+import { CircleCheck, LifeBuoy } from "lucide-react";
 import { ButtonLink, ExternalButton } from "@/components/ui/button";
 import { platformLinks } from "@/lib/env";
 import type { CreditApplicationStatus } from "@/lib/services/credit";
@@ -11,16 +12,21 @@ const NEXT_STEPS = [
   "Once a decision is made, your approved limit and terms appear in your Swaroop account.",
 ];
 
+const DEFAULT_MESSAGE =
+  "Your credit request has been submitted successfully. Our team will review your application and contact you.";
+
 export function SuccessPanel({
   applicationId,
   applicationNumber,
   submittedAt,
   status,
+  message = DEFAULT_MESSAGE,
 }: {
   applicationId: string;
   applicationNumber: string;
   submittedAt: string | null;
   status: CreditApplicationStatus;
+  message?: string;
 }) {
   return (
     <div className="text-center">
@@ -28,15 +34,16 @@ export function SuccessPanel({
         <CircleCheck aria-hidden="true" className="h-8 w-8" />
       </span>
       <h2 tabIndex={-1} id="credit-success-heading" className="mt-6 text-display-md font-semibold outline-none">
-        Credit request submitted successfully.
+        Request Submitted Successfully
       </h2>
-      <p className="mx-auto mt-3 max-w-lg text-ink-muted">
-        Keep your reference number handy. Approval isn't automatic — our team reviews every request.
+      <p className="mx-auto mt-3 max-w-lg text-ink-muted">{message}</p>
+      <p className="mx-auto mt-2 max-w-lg text-sm text-ink-subtle">
+        Keep your application number handy. Approval isn't automatic — our team reviews every request.
       </p>
       <div className="mx-auto mt-8 max-w-lg rounded-2xl border border-line p-5 text-left sm:p-6">
         <SummaryList
           items={[
-            { label: "Reference number", value: <span className="font-semibold text-brand-800">{applicationNumber}</span> },
+            { label: "Application number", value: <span className="font-semibold text-brand-800">{applicationNumber}</span> },
             { label: "Submitted", value: submittedAt ? formatDateTime(submittedAt) : "Just now" },
             { label: "Current status", value: <StatusBadge status={status} /> },
           ]}
@@ -63,6 +70,13 @@ export function SuccessPanel({
           Explore materials
         </ExternalButton>
       </div>
+      <p className="mt-6 flex items-center justify-center gap-2 text-sm text-ink-muted">
+        <LifeBuoy aria-hidden="true" className="h-4 w-4" />
+        Questions about your request?{" "}
+        <Link href="/contact?topic=CREDIT" className="font-semibold text-brand-800 underline-offset-4 hover:underline">
+          Contact support
+        </Link>
+      </p>
     </div>
   );
 }

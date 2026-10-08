@@ -9,6 +9,7 @@ import { platformLinks } from "@/lib/env";
 import { displayName, logout, type AuthUser } from "@/lib/services/auth";
 import {
   OPEN_STATUSES,
+  displayStatusOf,
   fetchApplication,
   fetchLatestApplication,
   saveDraft,
@@ -116,7 +117,21 @@ type Submitted = {
   applicationNumber: string;
   submittedAt: string | null;
   status: CreditApplicationStatus;
+  message: string;
 };
+
+const SUBMIT_FAILED = "Unable to submit your credit request right now. Please try again.";
+
+/** Validation messages are shown as-is; outages get a generic message plus a support reference. */
+function submitErrorMessage(error: unknown): string {
+  if (error instanceof ApiError) {
+    if (error.status >= 500 || error.isNetwork) {
+      return error.requestId ? `${SUBMIT_FAILED} (Reference: ${error.requestId})` : SUBMIT_FAILED;
+    }
+    return error.message;
+  }
+  return SUBMIT_FAILED;
+}
 
 function CreditWizard({ user }: { user: AuthUser }) {
   const [boot, setBoot] = useState<Bootstrap>({ status: "loading" });
@@ -194,7 +209,7 @@ function ExistingApplication({ application, approved = false }: { application: C
     <div className="card p-6 sm:p-9">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <p className="text-sm text-ink-subtle">Application {application.applicationNumber}</p>
-        <StatusBadge status={application.status} />
+        <StatusBadge status={displayStatusOf(application)} />
       </div>
       <h2 className="mt-4 text-2xl font-semibold">
         {approved ? "Your business credit is active." : "You already have a credit request in progress."}
@@ -298,6 +313,7 @@ function Wizard({
   const [docsBlocking, setDocsBlocking] = useState(false);
   const [docsError, setDocsError] = useState("");
   const [submitted, setSubmitted] = useState<Submitted | null>(null);
+  const submitInFlight = useRef(false);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const firstRender = useRef(true);
 
@@ -356,24 +372,28 @@ function Wizard({
   }
 
   async function submit() {
-    if (!application) return;
+    // Guards against double clicks between the click and the disabled re-render.
+    if (!application || submitInFlight.current) return;
+    submitInFlight.current = true;
     setSubmitting(true);
     setSubmitError("");
     try {
       await saveDraft(toDraftPayload(draft, new Date().toISOString()));
       const result = await submitApplication(application.id);
       clearStoredDraft(user.id);
-      trackEvent("credit_application_submitted");
+      if (!result.alreadySubmitted) trackEvent("credit_application_submitted");
       setSubmitted({
         id: result.id,
         applicationNumber: result.applicationNumber,
         submittedAt: result.submittedAt,
         status: result.status,
+        message: result.message,
       });
     } catch (error) {
-      setSubmitError(errorMessage(error, "We couldn't submit your request. Please try again."));
+      setSubmitError(submitErrorMessage(error));
       void refreshApplication();
     } finally {
+      submitInFlight.current = false;
       setSubmitting(false);
     }
   }
@@ -386,6 +406,7 @@ function Wizard({
           applicationNumber={submitted.applicationNumber}
           submittedAt={submitted.submittedAt}
           status={submitted.status}
+          message={submitted.message}
         />
       </div>
     );
@@ -406,6 +427,12 @@ function Wizard({
       <p className="mt-2 text-ink-muted">{current.description}</p>
       {application && step < 5 ? (
         <p className="mt-2 text-xs text-ink-subtle">Draft {application.applicationNumber} · saved to your account</p>
+      ) : null}
+      {application?.resubmissionRequested ? (
+        <Alert tone="warning" className="mt-5" title="The credit team asked for changes">
+          {application.customerMessage ??
+            "Review your application, update anything that changed, and submit it again."}
+        </Alert>
       ) : null}
 
       <div className="mt-8">

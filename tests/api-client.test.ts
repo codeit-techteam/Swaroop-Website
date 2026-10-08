@@ -82,6 +82,22 @@ describe("apiRequest", () => {
     });
   });
 
+  it("keeps only a well-formed request ID as the support reference", async () => {
+    mockFetch(() => json(500, { message: "boom", requestId: "req-7f3a9c" }));
+    await assert.rejects(apiRequest("/customer/credit/applications/x/submit"), (error) => {
+      assert.ok(error instanceof ApiError);
+      assert.equal(error.requestId, "req-7f3a9c");
+      return true;
+    });
+
+    mockFetch(() => json(500, { message: "boom", requestId: "<script>alert(1)</script>" }));
+    await assert.rejects(apiRequest("/customer/credit/applications/x/submit"), (error) => {
+      assert.ok(error instanceof ApiError);
+      assert.equal(error.requestId, null);
+      return true;
+    });
+  });
+
   it("hides internal-looking validation messages but keeps human ones", async () => {
     mockFetch(() => json(400, { message: ["Invalid `prisma.user.findUnique()` invocation"] }));
     await assert.rejects(apiRequest("/x", { auth: false }), (error) => {

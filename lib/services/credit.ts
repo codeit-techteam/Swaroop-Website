@@ -15,6 +15,12 @@ export type CreditApplicationStatus =
   | "EXPIRED"
   | "CANCELLED";
 
+/**
+ * What to show people: the stored status, or RESUBMISSION_REQUIRED for a
+ * draft the credit team reopened for changes.
+ */
+export type CreditDisplayStatus = CreditApplicationStatus | "RESUBMISSION_REQUIRED";
+
 /** Mirrors `CREDIT_APPLICATION_DOCUMENT_TYPES` in Swaroop-Backend. */
 export type CreditDocumentType =
   | "gst_registration"
@@ -49,6 +55,8 @@ export type CreditApplication = {
   id: string;
   applicationNumber: string;
   status: CreditApplicationStatus;
+  displayStatus?: CreditDisplayStatus;
+  resubmissionRequested?: boolean;
   requestedLimit: string;
   requestedTenureDays: number | null;
   purpose: string | null;
@@ -84,6 +92,37 @@ export type CreditDocumentCreated = CreditDocument & {
   storageConfigured?: boolean;
 };
 
+export type CreditApplicationSummary = {
+  id: string;
+  applicationNumber: string;
+  status: CreditApplicationStatus;
+  displayStatus: CreditDisplayStatus;
+  resubmissionRequested: boolean;
+  requestedLimit: string;
+  approvedLimit: string | null;
+  customerMessage: string | null;
+  submittedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
+  nextStep: string;
+};
+
+export type CreditSubmitResult = {
+  id: string;
+  applicationNumber: string;
+  status: CreditApplicationStatus;
+  submittedAt: string | null;
+  /** True when this call repeated an earlier successful submit. */
+  alreadySubmitted: boolean;
+  message: string;
+  nextStep: string;
+};
+
+/** The signed-in customer's applications, newest first. */
+export function fetchMyApplications() {
+  return apiRequest<CreditApplicationSummary[]>("/customer/credit/applications");
+}
+
 export function fetchLatestApplication() {
   return apiRequest<CreditApplication | null>("/customer/credit/application");
 }
@@ -111,7 +150,7 @@ export function createDocument(
 ) {
   return apiRequest<CreditDocumentCreated>(
     `/customer/credit/applications/${applicationId}/documents`,
-    { method: "POST", body: { ...input, metadata: { source: "WEBSITE" } } },
+    { method: "POST", body: input },
   );
 }
 
@@ -122,18 +161,15 @@ export function replaceDocument(
 ) {
   return apiRequest<CreditDocumentCreated>(
     `/customer/credit/applications/${applicationId}/documents/${documentId}/replace`,
-    { method: "POST", body: { ...input, metadata: { source: "WEBSITE" } } },
+    { method: "POST", body: input },
   );
 }
 
+/** Idempotent on the backend: retrying after a lost response returns the same application. */
 export function submitApplication(id: string) {
-  return apiRequest<{
-    id: string;
-    applicationNumber: string;
-    status: CreditApplicationStatus;
-    submittedAt: string | null;
-    nextStep: string;
-  }>(`/customer/credit/applications/${id}/submit`, { method: "POST" });
+  return apiRequest<CreditSubmitResult>(`/customer/credit/applications/${id}/submit`, {
+    method: "POST",
+  });
 }
 
 export function resubmitDocuments(id: string, message?: string) {
@@ -195,8 +231,9 @@ export function putToSignedUrl(
   });
 }
 
-const STATUS_LABELS: Record<CreditApplicationStatus, string> = {
+const STATUS_LABELS: Record<CreditDisplayStatus, string> = {
   DRAFT: "Draft",
+  RESUBMISSION_REQUIRED: "Resubmission required",
   PENDING: "Submitted",
   DOCUMENTS_UNDER_REVIEW: "Documents under review",
   UNDER_REVIEW: "Under review",
@@ -210,13 +247,20 @@ const STATUS_LABELS: Record<CreditApplicationStatus, string> = {
   CANCELLED: "Cancelled",
 };
 
-export function statusLabel(status: CreditApplicationStatus): string {
+export function statusLabel(status: CreditDisplayStatus): string {
   return STATUS_LABELS[status] ?? status;
+}
+
+export function displayStatusOf(application: {
+  status: CreditApplicationStatus;
+  displayStatus?: CreditDisplayStatus;
+}): CreditDisplayStatus {
+  return application.displayStatus ?? application.status;
 }
 
 export type StatusTone = "neutral" | "progress" | "attention" | "success" | "danger";
 
-export function statusTone(status: CreditApplicationStatus): StatusTone {
+export function statusTone(status: CreditDisplayStatus): StatusTone {
   switch (status) {
     case "APPROVED":
     case "PARTIALLY_APPROVED":
@@ -224,6 +268,7 @@ export function statusTone(status: CreditApplicationStatus): StatusTone {
     case "REJECTED":
       return "danger";
     case "DOCUMENTS_REQUIRED":
+    case "RESUBMISSION_REQUIRED":
       return "attention";
     case "DRAFT":
     case "EXPIRED":

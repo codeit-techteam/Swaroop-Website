@@ -18,12 +18,20 @@ export type Envelope<T, M = unknown> = {
 export class ApiError extends Error {
   readonly status: number;
   readonly code: string | null;
+  /** Backend request ID, safe to show as a support reference. */
+  readonly requestId: string | null;
 
-  constructor(message: string, status: number, code: string | null = null) {
+  constructor(
+    message: string,
+    status: number,
+    code: string | null = null,
+    requestId: string | null = null,
+  ) {
     super(message);
     this.name = "ApiError";
     this.status = status;
     this.code = code;
+    this.requestId = requestId;
   }
 
   get isUnauthorized() {
@@ -82,6 +90,14 @@ function errorCode(payload: unknown): string | null {
   if (payload && typeof payload === "object") {
     const code = (payload as { code?: unknown }).code;
     if (typeof code === "string") return code;
+  }
+  return null;
+}
+
+function errorRequestId(payload: unknown): string | null {
+  if (payload && typeof payload === "object") {
+    const id = (payload as { requestId?: unknown }).requestId;
+    if (typeof id === "string" && /^[\w-]{1,80}$/.test(id)) return id;
   }
   return null;
 }
@@ -200,6 +216,7 @@ export async function apiRequest<T>(
       safeMessage(payload, response.status),
       response.status,
       errorCode(payload),
+      errorRequestId(payload),
     );
   }
 

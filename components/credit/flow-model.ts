@@ -151,7 +151,6 @@ export function toDraftPayload(draft: FlowDraft, declarationsAcceptedAt?: string
     requestedTenureDays: tenure,
     purpose: purpose.slice(0, 2000),
     metadata: {
-      source: "WEBSITE",
       applicant: {
         companyName: applicant.companyName.trim(),
         contactPerson: applicant.contactPerson.trim(),

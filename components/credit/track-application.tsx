@@ -1,18 +1,22 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { LoaderCircle, RefreshCw } from "lucide-react";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { ApiError, errorMessage } from "@/lib/api-client";
 import {
   canEditDocuments,
+  displayStatusOf,
   fetchApplication,
   fetchLatestApplication,
+  fetchMyApplications,
   resubmitDocuments,
   type CreditApplication,
+  type CreditApplicationSummary,
 } from "@/lib/services/credit";
-import { formatDateTime, formatInr } from "@/lib/utils";
+import { cn, formatDate, formatDateTime, formatInr } from "@/lib/utils";
 import { DocumentsManager } from "./documents-manager";
 import { Alert, LoadingPanel, StatusBadge, SummaryList } from "./flow-ui";
 import { SignInPanel } from "./sign-in-panel";
@@ -60,6 +64,7 @@ function Tracker() {
   const [resubmitting, setResubmitting] = useState(false);
   const [resubmitError, setResubmitError] = useState("");
   const [resubmitted, setResubmitted] = useState(false);
+  const [mine, setMine] = useState<CreditApplicationSummary[]>([]);
 
   const fetchCurrent = useCallback(async (quiet = false) => {
     if (!quiet) setLoad({ status: "loading" });
@@ -80,6 +85,13 @@ function Tracker() {
   useEffect(() => {
     void fetchCurrent();
   }, [fetchCurrent]);
+
+  useEffect(() => {
+    // Secondary list; the selected application above still renders if this fails.
+    fetchMyApplications()
+      .then(setMine)
+      .catch(() => setMine([]));
+  }, []);
 
   if (load.status === "loading") return <LoadingPanel label="Loading your application…" />;
   if (load.status === "error") {
@@ -138,7 +150,7 @@ function Tracker() {
       <section className="card p-6 sm:p-9">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <p className="text-sm text-ink-subtle">Application {application.applicationNumber}</p>
-          <StatusBadge status={application.status} />
+          <StatusBadge status={displayStatusOf(application)} />
         </div>
         <h2 className="mt-4 text-2xl font-semibold sm:text-3xl">{formatInr(Number(application.requestedLimit))} requested</h2>
         {application.customerMessage ? (
@@ -147,9 +159,15 @@ function Tracker() {
           </Alert>
         ) : null}
         {application.status === "DRAFT" ? (
-          <Alert tone="info" className="mt-6" title="Not submitted yet" action={<ButtonLink href="/request-credit" size="sm">Continue application</ButtonLink>}>
-            Finish your documents and submit to send this request to the credit team.
-          </Alert>
+          application.resubmissionRequested ? (
+            <Alert tone="warning" className="mt-6" title="Changes requested" action={<ButtonLink href="/request-credit" size="sm">Update and resubmit</ButtonLink>}>
+              Update your application as requested above, then submit it again.
+            </Alert>
+          ) : (
+            <Alert tone="info" className="mt-6" title="Not submitted yet" action={<ButtonLink href="/request-credit" size="sm">Continue application</ButtonLink>}>
+              Finish your documents and submit to send this request to the credit team.
+            </Alert>
+          )
         ) : null}
         <div className="mt-6">
           <SummaryList
@@ -216,6 +234,38 @@ function Tracker() {
               </li>
             ))}
           </ol>
+        </section>
+      ) : null}
+
+      {mine.length > 0 ? (
+        <section aria-labelledby="my-applications" className="card p-6 sm:p-9">
+          <h2 id="my-applications" className="text-xl font-semibold">My credit applications</h2>
+          <ul className="mt-5 divide-y divide-line">
+            {mine.map((item) => {
+              const current = item.id === application.id;
+              return (
+                <li key={item.id}>
+                  <Link
+                    href={`/request-credit/track?id=${encodeURIComponent(item.id)}`}
+                    aria-current={current ? "page" : undefined}
+                    className={cn(
+                      "flex flex-wrap items-center justify-between gap-3 rounded-xl px-3 py-4 transition-colors hover:bg-mist/60",
+                      current && "bg-mist/60",
+                    )}
+                  >
+                    <span>
+                      <span className="block font-semibold text-ink">{item.applicationNumber}</span>
+                      <span className="block text-sm text-ink-subtle">
+                        {formatInr(Number(item.requestedLimit))} ·{" "}
+                        {item.submittedAt ? `Submitted ${formatDate(item.submittedAt)}` : "Not submitted"}
+                      </span>
+                    </span>
+                    <StatusBadge status={item.displayStatus} />
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
         </section>
       ) : null}
     </div>

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { CircleAlert, CircleCheck, Info, LoaderCircle, TriangleAlert } from "lucide-react";
-import { statusLabel, statusTone, type CreditApplicationStatus, type StatusTone } from "@/lib/services/credit";
+import { statusLabel, statusTone, type CreditDisplayStatus, type StatusTone } from "@/lib/services/credit";
 import { cn } from "@/lib/utils";
 
 type AlertTone = "info" | "success" | "warning" | "error";
@@ -51,7 +51,7 @@ const TONE_STYLES: Record<StatusTone, string> = {
   danger: "bg-red-50 text-red-700",
 };
 
-export function StatusBadge({ status }: { status: CreditApplicationStatus }) {
+export function StatusBadge({ status }: { status: CreditDisplayStatus }) {
   return (
     <span
       className={cn(
