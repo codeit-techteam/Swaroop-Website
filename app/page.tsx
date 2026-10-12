@@ -9,7 +9,9 @@ import { Hero } from "@/components/sections/hero";
 import { Industries } from "@/components/sections/industries";
 import { InsightsPreview } from "@/components/sections/insights-preview";
 import { LogisticsSection } from "@/components/sections/logistics";
+import { MarketplaceBanner } from "@/components/sections/marketplace-banner";
 import { MaterialsEcosystem } from "@/components/sections/materials-ecosystem";
+import { MobileApp } from "@/components/sections/mobile-app";
 import { NetworkSection } from "@/components/sections/network";
 import { ProcessTimeline } from "@/components/sections/process-timeline";
 import { Technology } from "@/components/sections/technology";
@@ -31,11 +33,13 @@ export default function HomePage() {
       <JsonLd data={faqJsonLd(FAQ_ITEMS)} />
       <Hero />
       <TrustStrip />
+      <MarketplaceBanner />
       <MaterialsEcosystem />
       <BuySell />
       <ProcessTimeline />
       <VerifiedSupply />
       <Technology />
+      <MobileApp />
       <CreditSection />
       <NetworkSection />
       <LogisticsSection />

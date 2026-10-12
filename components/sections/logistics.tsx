@@ -6,11 +6,11 @@ import logisticsImage from "@/public/images/logistics-hub.webp";
 const STAGES = ["Purchase", "Commercial confirmation", "Dispatch", "Shipment", "Delivery"];
 
 const FEATURES = [
-  { icon: Route, title: "Delivery coordination", detail: "Swaroop coordinates pickup and delivery for each confirmed order." },
+  { icon: Route, title: "Delivery coordination", detail: "Petrotrade coordinates pickup and delivery for each confirmed order." },
   { icon: PackageSearch, title: "Shipment tracking", detail: "Follow shipment status updates and milestones from your dashboard." },
   { icon: FileText, title: "Documentation", detail: "Invoices and transport documents travel with every shipment." },
   { icon: Truck, title: "Dispatch management", detail: "Dispatch is planned against confirmed quantities and locations." },
-  { icon: Eye, title: "Delivery visibility", detail: "Know where your order stands from confirmation to doorstep." },
+  { icon: Eye, title: "Delivery visibility", detail: "Know where your order stands at every recorded milestone." },
 ];
 
 export function LogisticsSection() {
@@ -20,7 +20,7 @@ export function LogisticsSection() {
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-end">
           <SectionHeading
             eyebrow="Logistics"
-            title={<span id="logistics-heading">From order confirmation to your doorstep.</span>}
+            title={<span id="logistics-heading">Every order tracked, from confirmation to dispatch.</span>}
             description="Logistics is part of the order, not an afterthought. Every shipment moves through clear, recorded milestones."
           />
           <ol data-reveal aria-label="Order stages" className="flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:items-center">
@@ -52,7 +52,7 @@ export function LogisticsSection() {
             />
             <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-tr from-brand-950/70 to-transparent" />
             <p className="absolute bottom-6 left-6 right-6 max-w-sm font-display text-2xl font-semibold leading-snug text-white">
-              Dispatch, shipment and delivery — tracked as one order.
+              Dispatch, shipment and delivery - tracked as one order.
             </p>
           </div>
           <ul className="grid gap-3">

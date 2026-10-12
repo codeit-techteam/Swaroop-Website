@@ -1,6 +1,7 @@
 import Link from "next/link";
-import { Mail, Phone } from "lucide-react";
+import { ArrowRight, Mail, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
+import { buttonClasses } from "@/components/ui/button";
 import { FOOTER_COLUMNS, SITE } from "@/content/site";
 import { env, platformLinks } from "@/lib/env";
 
@@ -28,16 +29,32 @@ export function SiteFooter() {
     <footer className="relative overflow-hidden bg-brand-900 text-brand-100">
       <div aria-hidden="true" className="grid-texture absolute inset-0 opacity-60" />
       <div className="container relative">
-        <div className="grid gap-12 border-b border-white/10 py-16 lg:grid-cols-[1.2fr_2fr] lg:py-20">
-          <div className="max-w-sm">
-            <Link href="/" aria-label="Swaroop home" className="inline-block rounded-lg">
-              <Logo tone="light" />
-            </Link>
-            <p className="mt-6 text-[0.95rem] leading-relaxed text-brand-100/70">
-              {SITE.description}
+        <section
+          aria-labelledby="footer-connect-heading"
+          className="flex flex-col gap-8 border-b border-white/10 py-12 lg:flex-row lg:items-center lg:justify-between lg:py-14"
+        >
+          <div className="max-w-xl">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-300">Connect with us</p>
+            <h2 id="footer-connect-heading" className="mt-3 font-display text-2xl font-semibold text-white sm:text-3xl">
+              Talk to the Petrotrade team.
+            </h2>
+            <p className="mt-3 text-[0.95rem] leading-relaxed text-brand-100/70">
+              Sourcing, selling, import trading, credit or partnerships - send us a message and we'll
+              route it to the right desk.
             </p>
+          </div>
+          <div className="flex flex-col gap-5 lg:items-end">
+            <div className="flex flex-wrap gap-3">
+              <Link href="/contact" className={buttonClasses("primary", "lg")}>
+                Contact Us
+                <ArrowRight aria-hidden="true" className="h-4 w-4" />
+              </Link>
+              <Link href="/contact?topic=PARTNERSHIP" className={buttonClasses("outline-light", "lg")}>
+                Partner with us
+              </Link>
+            </div>
             {env.contactEmail || env.contactPhone ? (
-              <ul className="mt-6 space-y-2 text-sm">
+              <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
                 {env.contactEmail ? (
                   <li>
                     <a href={`mailto:${env.contactEmail}`} className="inline-flex items-center gap-2 hover:text-white">
@@ -55,7 +72,7 @@ export function SiteFooter() {
               </ul>
             ) : null}
             {socials.length ? (
-              <ul className="mt-6 flex gap-2" aria-label="Swaroop on social media">
+              <ul className="flex gap-2" aria-label="Petrotrade on social media">
                 {socials.map((social) => (
                   <li key={social.key}>
                     <a
@@ -73,6 +90,17 @@ export function SiteFooter() {
                 ))}
               </ul>
             ) : null}
+          </div>
+        </section>
+
+        <div className="grid gap-12 border-b border-white/10 py-16 lg:grid-cols-[1.2fr_2fr] lg:py-20">
+          <div className="max-w-sm">
+            <Link href="/" aria-label="Petrotrade home" className="inline-block rounded-lg">
+              <Logo tone="light" />
+            </Link>
+            <p className="mt-6 text-[0.95rem] leading-relaxed text-brand-100/70">
+              {SITE.description}
+            </p>
           </div>
 
           <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
@@ -106,7 +134,7 @@ export function SiteFooter() {
         </div>
         <div className="flex flex-col gap-3 py-8 text-sm text-brand-100/55 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} {SITE.legalName}. All rights reserved.</p>
-          <p>Industrial materials, procurement and business credit — built for India.</p>
+          <p>Industrial materials, procurement and business credit - built for India.</p>
         </div>
       </div>
     </footer>

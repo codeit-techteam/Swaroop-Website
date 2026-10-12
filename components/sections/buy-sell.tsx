@@ -4,7 +4,7 @@ import { TrackedLink } from "@/components/ui/tracked-link";
 import { platformLinks } from "@/lib/env";
 
 const BUY = [
-  "Browse grades from the Swaroop Grade Master",
+  "Browse grades from the Petrotrade Grade Master",
   "Compare available offers",
   "Submit purchase requests",
   "Flexible payment options, including business credit",
@@ -30,10 +30,10 @@ export function BuySell({ showHeading = true }: { showHeading?: boolean }) {
             eyebrow="Buy or sell"
             align="center"
             title={<span id="buy-sell-heading">Two sides of one trusted marketplace.</span>}
-            description="Buyers get verified supply and structured procurement. Sellers reach qualified industrial demand. Swaroop runs the process in between."
+            description="Buyers get verified supply and structured procurement. Sellers reach qualified industrial demand. Petrotrade runs the process in between."
           />
         ) : (
-          <h2 id="buy-sell-heading" className="sr-only">Buy or sell on Swaroop</h2>
+          <h2 id="buy-sell-heading" className="sr-only">Buy or sell on Petrotrade</h2>
         )}
 
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
@@ -107,7 +107,7 @@ export function BuySell({ showHeading = true }: { showHeading?: boolean }) {
                   size="lg"
                   arrow
                 >
-                  Sell With Swaroop
+                  Sell With Petrotrade
                 </TrackedLink>
                 <TrackedLink
                   href={platformLinks.sellerLogin}

@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Insights — Market Updates & Procurement Guides",
+  title: "Insights - Market Updates & Procurement Guides",
   description:
     "Market updates, material insights, procurement guides and industry news for buyers and sellers of polymers, petrochemicals and industrial materials.",
   path: "/insights",
@@ -72,7 +72,7 @@ export default function InsightsPage() {
           <div className="flex flex-col items-start justify-between gap-6 rounded-2xl bg-brand-900 p-8 text-white sm:flex-row sm:items-center sm:p-10">
             <div>
               <h2 className="text-2xl font-semibold text-white">Have a topic you want covered?</h2>
-              <p className="mt-2 text-brand-100/80">Share it with our team — we prioritise what buyers and sellers ask for.</p>
+              <p className="mt-2 text-brand-100/80">Share it with our team - we prioritise what buyers and sellers ask for.</p>
             </div>
             <ButtonLink href="/contact?topic=OTHER" variant="light" arrow>
               Suggest a topic

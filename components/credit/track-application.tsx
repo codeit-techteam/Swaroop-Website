@@ -42,7 +42,7 @@ export function TrackApplication() {
   if (!hasCustomerRole(state.user)) {
     return (
       <Alert tone="warning" title="No buyer account found">
-        Credit applications belong to Swaroop buyer accounts. Sign in with your buyer account to track one.
+        Credit applications belong to Petrotrade buyer accounts. Sign in with your buyer account to track one.
       </Alert>
     );
   }
@@ -173,7 +173,7 @@ function Tracker() {
           <SummaryList
             items={[
               { label: "Submitted", value: application.submittedAt ? formatDateTime(application.submittedAt) : "Not yet submitted" },
-              { label: "Preferred terms", value: application.requestedTenureDays ? `${application.requestedTenureDays} days` : "—" },
+              { label: "Preferred terms", value: application.requestedTenureDays ? `${application.requestedTenureDays} days` : "-" },
               ...(application.approvedLimit
                 ? [{ label: "Approved limit", value: formatInr(Number(application.approvedLimit)) }]
                 : []),

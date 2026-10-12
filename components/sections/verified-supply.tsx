@@ -15,7 +15,7 @@ import warehouseImage from "@/public/images/warehouse.webp";
 
 const POINTS = [
   { icon: Building2, title: "Verified businesses", detail: "Every buyer and seller is onboarded as a registered business." },
-  { icon: Fingerprint, title: "KYC review", detail: "Business documents are reviewed by the Swaroop compliance team." },
+  { icon: Fingerprint, title: "KYC review", detail: "Business documents are reviewed by the Petrotrade compliance team." },
   { icon: Receipt, title: "GST verification", detail: "GSTINs are verified server-side with our verification partner." },
   { icon: BadgeCheck, title: "PAN verification", detail: "PAN details are matched and only masked values are displayed." },
   { icon: Layers, title: "Grade Master", detail: "Offers map to standardised grades, so specifications stay consistent." },
@@ -35,7 +35,7 @@ export function VerifiedSupply() {
             <SectionHeading
               eyebrow="Verified supply"
               title={<span id="supply-heading">Supply you can trust.</span>}
-              description="Trust is designed into the platform — from who can sell, to what is being sold, to how every order is executed."
+              description="Trust is designed into the platform - from who can sell, to what is being sold, to how every order is executed."
             />
             <ul className="mt-10 grid gap-x-8 gap-y-7 sm:grid-cols-2">
               {POINTS.map((point, index) => (
@@ -68,7 +68,7 @@ export function VerifiedSupply() {
               <div aria-hidden="true" className="absolute inset-0 bg-gradient-to-t from-brand-950/85 via-brand-950/20 to-transparent" />
               <div className="absolute inset-x-4 bottom-4 rounded-2xl border border-white/15 bg-brand-950/70 p-5 backdrop-blur-md sm:inset-x-6 sm:bottom-6 sm:p-6">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-200">
-                  The Swaroop trust chain
+                  The Petrotrade trust chain
                 </p>
                 <ol className="mt-4 flex flex-wrap items-center gap-x-1 gap-y-2 text-sm font-medium text-white">
                   {CHAIN.map((step, index) => (

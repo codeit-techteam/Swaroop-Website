@@ -80,7 +80,7 @@ export function SummaryList({ items }: { items: { label: string; value: ReactNod
       {items.map((item) => (
         <div key={item.label} className="grid gap-1 py-3 sm:grid-cols-[200px_1fr] sm:gap-4">
           <dt className="text-sm text-ink-subtle">{item.label}</dt>
-          <dd className="break-words text-[0.95rem] font-medium text-ink">{item.value || "—"}</dd>
+          <dd className="break-words text-[0.95rem] font-medium text-ink">{item.value || "-"}</dd>
         </div>
       ))}
     </dl>

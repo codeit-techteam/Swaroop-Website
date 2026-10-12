@@ -19,7 +19,7 @@ const display = Inter_Tight({
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.siteUrl),
-  title: { default: SITE.title, template: "%s | Swaroop" },
+  title: { default: SITE.title, template: "%s | Petrotrade" },
   description: SITE.description,
   applicationName: SITE.name,
   keywords: [

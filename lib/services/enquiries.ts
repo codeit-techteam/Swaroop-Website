@@ -2,7 +2,7 @@ import { apiRequest } from "@/lib/api-client";
 
 export const ENQUIRY_TOPICS = [
   { value: "BUY_MATERIALS", label: "Buying materials" },
-  { value: "SELL_MATERIALS", label: "Selling on Swaroop" },
+  { value: "SELL_MATERIALS", label: "Selling on Petrotrade" },
   { value: "CREDIT", label: "Business credit" },
   { value: "LOGISTICS", label: "Logistics & delivery" },
   { value: "PARTNERSHIP", label: "Partnership" },
@@ -18,7 +18,7 @@ export type EnquiryInput = {
   phone?: string;
   topic: EnquiryTopic;
   message: string;
-  /** Honeypot — must stay empty. */
+  /** Honeypot - must stay empty. */
   website?: string;
   pagePath?: string;
 };

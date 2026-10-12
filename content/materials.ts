@@ -1,8 +1,8 @@
 /**
- * Public marketing view of the Swaroop Grade Master taxonomy
+ * Public marketing view of the Petrotrade Grade Master taxonomy
  * (Swaroop-Backend `prisma/seed-data/master-data.normalized.json`).
  *
- * Only category families and typical applications are listed here — live
+ * Only category families and typical applications are listed here - live
  * grades, offers, prices and availability stay inside the authenticated
  * Customer / Seller platforms.
  */

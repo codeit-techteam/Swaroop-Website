@@ -1,5 +1,5 @@
 /**
- * Website session tokens issued by the Swaroop backend (`/auth/*`). The website
+ * Website session tokens issued by the Petrotrade backend (`/auth/*`). The website
  * runs on its own origin, so it keeps its own copy of the session; identity is
  * always derived server-side from the bearer token.
  */
@@ -46,7 +46,7 @@ export function writeSession(tokens: SessionTokens): void {
   try {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(tokens));
   } catch {
-    /* storage unavailable — memory copy still serves this tab */
+    /* storage unavailable - memory copy still serves this tab */
   }
   window.dispatchEvent(new Event(SESSION_CHANGED_EVENT));
 }
@@ -62,7 +62,7 @@ export function clearSession(): void {
   window.dispatchEvent(new Event(SESSION_CHANGED_EVENT));
 }
 
-/** Reads `exp` without verifying the signature — only used to refresh early. */
+/** Reads `exp` without verifying the signature - only used to refresh early. */
 export function tokenExpiresAt(token: string): number | null {
   try {
     const segment = token.split(".")[1];

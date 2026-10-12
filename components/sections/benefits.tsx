@@ -5,7 +5,7 @@ const BENEFITS = [
   { icon: ClipboardCheck, title: "Better procurement", detail: "Standardised grades, comparable offers and one structured buying process." },
   { icon: BadgeCheck, title: "Verified supply", detail: "Trade only with businesses that have passed GST, PAN and KYC checks." },
   { icon: Boxes, title: "Reliable delivery", detail: "Coordinated dispatch and shipment milestones for every order." },
-  { icon: Wallet, title: "Flexible finance", detail: "Advance, on-delivery or approved business credit — chosen per order." },
+  { icon: Wallet, title: "Flexible finance", detail: "Advance, on-delivery or approved business credit - chosen per order." },
   { icon: FileCheck2, title: "Digital documentation", detail: "Invoices, delivery and compliance documents stored with each order." },
   { icon: Network, title: "One connected platform", detail: "Materials, procurement, logistics and finance in a single account." },
 ];
@@ -15,7 +15,7 @@ export function Benefits() {
     <section aria-labelledby="benefits-heading" className="section bg-white">
       <div className="container">
         <SectionHeading
-          eyebrow="Why Swaroop"
+          eyebrow="Why Petrotrade"
           align="center"
           title={<span id="benefits-heading">Built for the way industry actually buys.</span>}
         />

@@ -91,7 +91,7 @@ export function ReviewStep({
             { label: "Time in business", value: requirement.businessDuration },
             {
               label: "Existing credit facility",
-              value: requirement.existingFacility === "yes" ? `Yes — ${requirement.existingFacilityDetails}` : "No",
+              value: requirement.existingFacility === "yes" ? `Yes - ${requirement.existingFacilityDetails}` : "No",
             },
           ]}
         />
@@ -119,7 +119,7 @@ export function ReviewStep({
             />
             <span>
               I confirm the information and documents provided are accurate and that I am authorised to
-              apply on behalf of this business. I authorise Swaroop to verify them.
+              apply on behalf of this business. I authorise Petrotrade to verify them.
             </span>
           </label>
           <label className="flex items-start gap-3">
@@ -131,7 +131,7 @@ export function ReviewStep({
             />
             <span>
               I understand that submitting this request does not guarantee approval, and that any credit
-              limit and terms are decided by Swaroop after review.
+              limit and terms are decided by Petrotrade after review.
             </span>
           </label>
         </div>

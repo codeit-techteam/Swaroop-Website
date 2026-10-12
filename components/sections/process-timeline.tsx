@@ -13,7 +13,7 @@ export const PROCESS_STEPS = [
   {
     icon: ScanSearch,
     title: "Choose material",
-    detail: "Find the exact grade you need in the Swaroop Grade Master.",
+    detail: "Find the exact grade you need in the Petrotrade Grade Master.",
   },
   {
     icon: Handshake,
@@ -28,7 +28,7 @@ export const PROCESS_STEPS = [
   {
     icon: FileSignature,
     title: "Commercial confirmation",
-    detail: "Swaroop confirms price, quantity and terms with you.",
+    detail: "Petrotrade confirms price, quantity and terms with you.",
   },
   {
     icon: CreditCard,
@@ -55,11 +55,11 @@ export function ProcessTimeline({ headingLevel = "h2" }: { headingLevel?: "h1" |
       <div className="container relative">
         <SectionHeading
           as={headingLevel}
-          eyebrow="How Swaroop works"
+          eyebrow="How Petrotrade works"
           tone="light"
           align="center"
-          title={<span id="process-heading">From grade to doorstep in seven clear steps.</span>}
-          description="One structured, transparent order lifecycle — the same for every buyer, every material and every order."
+          title={<span id="process-heading">From grade selection to delivery in seven clear steps.</span>}
+          description="One structured, transparent order lifecycle - the same for every buyer, every material and every order."
         />
 
         <ol className="relative mt-16 grid gap-0 lg:mt-20 lg:grid-cols-7 lg:gap-4">

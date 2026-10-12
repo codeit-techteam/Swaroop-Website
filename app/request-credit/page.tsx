@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Request Business Credit",
   description:
-    "Apply for Swaroop business credit for industrial material procurement. Verify your business, share your requirement and upload documents securely.",
+    "Apply for Petrotrade business credit for industrial material procurement. Verify your business, share your requirement and upload documents securely.",
   path: "/request-credit",
 });
 
@@ -18,8 +18,8 @@ const CHECKLIST = [
 ];
 
 const ASSURANCES = [
-  { icon: Lock, text: "Sign in with your Swaroop buyer account — no new passwords." },
-  { icon: ShieldCheck, text: "GST and PAN checks run on Swaroop's servers. Only masked values are shown." },
+  { icon: Lock, text: "Sign in with your Petrotrade buyer account - no new passwords." },
+  { icon: ShieldCheck, text: "GST and PAN checks run on Petrotrade's servers. Only masked values are shown." },
   { icon: FileCheck2, text: "Documents upload straight to secure storage and are seen only by the credit team." },
   { icon: Timer, text: "Your progress is saved as a draft on your account." },
 ];
@@ -31,7 +31,7 @@ export default function RequestCreditPage() {
         eyebrow="Request credit"
         breadcrumb={{ name: "Request Credit", path: "/request-credit" }}
         title="Apply for business credit."
-        description="Five short steps. Every request is reviewed by the Swaroop credit team — approval is never automatic."
+        description="Five short steps. Every request is reviewed by the Petrotrade credit team - approval is never automatic."
       />
       <section id="credit-flow" className="section scroll-mt-20 bg-paper">
         <div className="container grid gap-10 lg:grid-cols-[1fr_320px] lg:gap-12">

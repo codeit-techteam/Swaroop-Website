@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Privacy Policy",
-  description: "How Swaroop collects, uses, stores and protects information on its website and platform.",
+  description: "How Petrotrade collects, uses, stores and protects information on its website and platform.",
   path: "/privacy",
 });
 
@@ -15,7 +15,7 @@ const SECTIONS: LegalSection[] = [
     title: "Information we collect",
     body: (
       <>
-        <p>We collect only what we need to operate the Swaroop website and platform:</p>
+        <p>We collect only what we need to operate the Petrotrade website and platform:</p>
         <ul>
           <li>Contact details you submit through our forms, such as name, company, email, phone and your message.</li>
           <li>Account details used to sign in, such as mobile number or email address.</li>
@@ -44,7 +44,7 @@ const SECTIONS: LegalSection[] = [
     title: "Business verification",
     body: (
       <p>
-        GSTIN and PAN verification is performed by Swaroop's servers through our verification partner —
+        GSTIN and PAN verification is performed by Petrotrade's servers through our verification partner -
         never directly from your browser. We store verification results with masked identifiers and
         show only masked values back to you.
       </p>
@@ -72,7 +72,7 @@ const SECTIONS: LegalSection[] = [
     body: (
       <p>
         Documents are stored in access-controlled cloud storage and are served only through
-        time-limited signed links. Access within Swaroop is limited to staff who need it for
+        time-limited signed links. Access within Petrotrade is limited to staff who need it for
         verification, operations or credit review, and administrative actions are audit-logged.
       </p>
     ),
@@ -112,7 +112,7 @@ export default function PrivacyPage() {
       breadcrumb="Privacy Policy"
       path="/privacy"
       updated="8 October 2026"
-      intro={<p>This policy explains how Swaroop handles information when you use our website and platform.</p>}
+      intro={<p>This policy explains how Petrotrade handles information when you use our website and platform.</p>}
       sections={SECTIONS}
     />
   );

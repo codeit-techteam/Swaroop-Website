@@ -2,7 +2,7 @@
   "name": "swaroop-website",
   "version": "1.0.0",
   "private": true,
-  "description": "SWAROOP corporate website — industrial materials, procurement and business credit",
+  "description": "PETROTRADE corporate website - industrial materials, procurement and business credit",
   "scripts": {
     "dev": "next dev -p 3004",
     "build": "next build",

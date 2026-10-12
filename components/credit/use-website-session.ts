@@ -37,7 +37,7 @@ export function useWebsiteSession() {
         status: "error",
         message:
           error instanceof ApiError && error.isNetwork
-            ? "We couldn't reach Swaroop. Check your connection and try again."
+            ? "We couldn't reach Petrotrade. Check your connection and try again."
             : "We couldn't load your account right now. Please try again.",
       });
     }

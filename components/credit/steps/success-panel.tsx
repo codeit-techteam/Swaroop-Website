@@ -8,8 +8,8 @@ import { StatusBadge, SummaryList } from "../flow-ui";
 
 const NEXT_STEPS = [
   "Our credit team reviews your business profile and documents.",
-  "If anything is missing, we'll ask you to upload it — you'll see this on the tracking page.",
-  "Once a decision is made, your approved limit and terms appear in your Swaroop account.",
+  "If anything is missing, we'll ask you to upload it - you'll see this on the tracking page.",
+  "Once a decision is made, your approved limit and terms appear in your Petrotrade account.",
 ];
 
 const DEFAULT_MESSAGE =
@@ -38,7 +38,7 @@ export function SuccessPanel({
       </h2>
       <p className="mx-auto mt-3 max-w-lg text-ink-muted">{message}</p>
       <p className="mx-auto mt-2 max-w-lg text-sm text-ink-subtle">
-        Keep your application number handy. Approval isn't automatic — our team reviews every request.
+        Keep your application number handy. Approval isn't automatic - our team reviews every request.
       </p>
       <div className="mx-auto mt-8 max-w-lg rounded-2xl border border-line p-5 text-left sm:p-6">
         <SummaryList

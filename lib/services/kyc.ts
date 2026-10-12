@@ -66,7 +66,7 @@ export function fetchKycOverview() {
   return apiRequest<KycOverview>("/customer/kyc");
 }
 
-/** Server-side GSTIN verification — the provider is never called from the browser. */
+/** Server-side GSTIN verification - the provider is never called from the browser. */
 export function verifyGstin(gstin: string) {
   return apiRequest<KycVerifyResult>("/customer/kyc/gst/verify", {
     method: "POST",
@@ -82,7 +82,7 @@ export function verifyPan(input: { pan: string; fullName: string; dob: string })
 }
 
 export function maskPan(pan: string | null | undefined): string {
-  if (!pan) return "—";
+  if (!pan) return "-";
   const value = pan.trim().toUpperCase();
   if (/[*•]/.test(value)) return value;
   if (value.length !== 10) return "••••••••••";
@@ -90,7 +90,7 @@ export function maskPan(pan: string | null | undefined): string {
 }
 
 export function maskGstin(gstin: string | null | undefined): string {
-  if (!gstin) return "—";
+  if (!gstin) return "-";
   const value = gstin.trim().toUpperCase();
   if (value.length !== 15) return value;
   return `${value.slice(0, 2)}${value.slice(2, 4)}•••••••${value.slice(11)}`;

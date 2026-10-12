@@ -2,7 +2,7 @@
  * Browser-safe configuration only. Never add secrets here: every
  * NEXT_PUBLIC_* value is inlined into the client bundle.
  *
- * Fallbacks are the deployed Swaroop production endpoints (the same values the
+ * Fallbacks are the deployed Petrotrade production endpoints (the same values the
  * Customer / Seller / Admin web apps ship with), so a production build can never
  * silently point at localhost.
  */
@@ -47,6 +47,8 @@ export const env = {
 } as const;
 
 export const platformLinks = {
+  customerHome: env.customerAppUrl,
+  customerPurchaseRequest: `${env.customerAppUrl}/purchase-requests/create`,
   customerLogin: `${env.customerAppUrl}/login`,
   customerRegister: `${env.customerAppUrl}/register`,
   customerMarketplace: `${env.customerAppUrl}/marketplace`,
@@ -54,4 +56,6 @@ export const platformLinks = {
   customerKyc: `${env.customerAppUrl}/kyc`,
   sellerLogin: `${env.sellerAppUrl}/login`,
   sellerRegister: `${env.sellerAppUrl}/register`,
+  customerImportBuy: `${env.customerAppUrl}/import/buy/new`,
+  sellerImportSell: `${env.sellerAppUrl}/import/sell/new`,
 } as const;

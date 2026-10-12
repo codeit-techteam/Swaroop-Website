@@ -2,7 +2,7 @@
  * Insights are CMS-ready: the backend CMS currently only serves authenticated
  * banners, so there is no published article feed yet. Until one exists, the
  * site renders the editorial categories below and an explicit "coming soon"
- * state — it never invents articles, dates or authors.
+ * state - it never invents articles, dates or authors.
  */
 export type InsightCategory = {
   slug: "market-updates" | "material-insights" | "procurement-guides" | "industry-news";

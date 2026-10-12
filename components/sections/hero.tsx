@@ -4,7 +4,7 @@ import { TrackedLink } from "@/components/ui/tracked-link";
 import heroImage from "@/public/images/hero-refinery-granules.webp";
 
 const FLOW = [
-  { icon: ScanSearch, title: "Grade selected", detail: "Matched to the Swaroop Grade Master" },
+  { icon: ScanSearch, title: "Grade selected", detail: "Matched to the Petrotrade Grade Master" },
   { icon: BadgeCheck, title: "Verified supplier offer", detail: "KYC-verified seller, confidential until confirmation" },
   { icon: FileCheck2, title: "Commercial confirmation", detail: "Price, quantity and terms agreed" },
   { icon: Truck, title: "Dispatch & shipment", detail: "Milestones and documents in one place" },
@@ -38,7 +38,7 @@ export function Hero() {
             <span className="block">Delivered better.</span>
           </h1>
           <p className="mt-7 max-w-xl text-lg leading-relaxed text-brand-100/85 sm:text-xl">
-            Reliable polymers, petrochemicals and industrial materials — sourced from verified
+            Reliable polymers, petrochemicals and industrial materials - sourced from verified
             suppliers, traded transparently and delivered through one technology-driven platform.
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">

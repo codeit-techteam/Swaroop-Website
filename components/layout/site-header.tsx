@@ -90,14 +90,14 @@ export function SiteHeader() {
         Skip to content
       </a>
       <div className="container flex h-[var(--header-h)] items-center justify-between gap-3 sm:gap-6">
-        <Link href="/" aria-label="Swaroop home" className="rounded-lg">
+        <Link href="/" aria-label="Petrotrade home" className="rounded-lg">
           <Logo
             tone={solid ? "dark" : "light"}
-            wordmarkClassName="max-sm:text-[1.05rem] max-sm:tracking-[0.14em] max-[359px]:hidden"
+            wordmarkClassName="max-sm:text-[1rem] max-sm:tracking-[0.1em] max-[359px]:hidden"
           />
         </Link>
 
-        <nav aria-label="Primary" className="hidden lg:block">
+        <nav aria-label="Primary" className="hidden xl:block">
           <ul className="flex items-center gap-1">
             {PRIMARY_NAV.map((item) => {
               const active = isActive(pathname, item.href);
@@ -107,7 +107,7 @@ export function SiteHeader() {
                     href={item.href}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "relative rounded-full px-3.5 py-2 text-[0.92rem] font-medium transition-colors",
+                      "relative whitespace-nowrap rounded-full px-3 py-2 text-[0.92rem] font-medium transition-colors",
                       solid
                         ? active
                           ? "text-brand-800"
@@ -121,7 +121,7 @@ export function SiteHeader() {
                     {active ? (
                       <span
                         aria-hidden="true"
-                        className="absolute inset-x-3.5 -bottom-0.5 h-0.5 rounded-full bg-accent"
+                        className="absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-accent"
                       />
                     ) : null}
                   </Link>
@@ -160,7 +160,7 @@ export function SiteHeader() {
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => setOpen((value) => !value)}
             className={cn(
-              "inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors lg:hidden",
+              "inline-flex h-10 w-10 items-center justify-center rounded-full transition-colors xl:hidden",
               solid ? "text-brand-800 hover:bg-mist" : "text-white hover:bg-white/10",
             )}
           >
@@ -173,7 +173,7 @@ export function SiteHeader() {
         id="mobile-nav"
         ref={panelRef}
         hidden={!open}
-        className="h-[calc(100dvh-var(--header-h))] overflow-y-auto border-t border-line bg-white lg:hidden"
+        className="h-[calc(100dvh-var(--header-h))] overflow-y-auto border-t border-line bg-white xl:hidden"
       >
         <nav aria-label="Mobile" className="container flex min-h-full flex-col py-6">
           <ul className="divide-y divide-line">
@@ -189,15 +189,6 @@ export function SiteHeader() {
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                href="/contact"
-                className="flex items-center justify-between py-4 font-display text-2xl font-semibold text-brand-800"
-              >
-                Contact
-                <ArrowUpRight aria-hidden="true" className="h-5 w-5 text-ink-subtle" />
-              </Link>
-            </li>
           </ul>
           <div className="mt-auto grid gap-3 pt-8">
             <TrackedLink
@@ -227,7 +218,7 @@ export function SiteHeader() {
               variant="ghost"
               size="lg"
             >
-              Sell With Swaroop
+              Sell With Petrotrade
             </TrackedLink>
           </div>
         </nav>

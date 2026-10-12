@@ -17,9 +17,9 @@ export const PAYMENT_TERMS = [
 
 export const BUSINESS_DURATIONS = [
   "Less than 1 year",
-  "1–3 years",
-  "3–5 years",
-  "5–10 years",
+  "1-3 years",
+  "3-5 years",
+  "5-10 years",
   "More than 10 years",
 ] as const;
 
@@ -62,6 +62,6 @@ export const INDIAN_STATES = [
   "West Bengal",
 ] as const;
 
-/** Sanity bounds only — the credit team sets the actual limit. */
+/** Sanity bounds only - the credit team sets the actual limit. */
 export const MIN_REQUESTED_CREDIT = 10_000;
 export const MAX_REQUESTED_CREDIT = 1_000_000_000;

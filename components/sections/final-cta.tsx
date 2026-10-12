@@ -16,7 +16,7 @@ export function FinalCta() {
               Move your industrial procurement forward.
             </h2>
             <p className="mx-auto mt-6 max-w-xl text-lg text-brand-100/80">
-              Verified supply, structured buying, coordinated delivery and business credit — on one
+              Verified supply, structured buying, coordinated delivery and business credit - on one
               platform built for Indian industry.
             </p>
             <div className="mt-10 flex flex-wrap justify-center gap-3">

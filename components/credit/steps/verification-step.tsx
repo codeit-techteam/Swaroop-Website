@@ -27,8 +27,8 @@ export function VerificationSummary({ kyc }: { kyc: KycOverview }) {
   return (
     <SummaryList
       items={[
-        { label: "Legal name", value: gst?.details.legalName || kyc.organization.legalName || "—" },
-        { label: "GSTIN", value: gst?.identifierMasked || "—" },
+        { label: "Legal name", value: gst?.details.legalName || kyc.organization.legalName || "-" },
+        { label: "GSTIN", value: gst?.identifierMasked || "-" },
         { label: "GST verification", value: gst ? STATUS_COPY[gst.status] : "Not started" },
         { label: "PAN", value: pan?.identifierMasked || gst?.details.panMasked || maskPan(kyc.organization.pan) },
         { label: "PAN verification", value: pan ? STATUS_COPY[pan.status] : "Linked through GSTIN" },
@@ -99,8 +99,8 @@ export function VerificationStep({
       <div className="flex items-start gap-3 rounded-xl bg-paper p-4 text-sm text-ink-muted">
         <ShieldCheck aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
         <p>
-          Verification runs on Swaroop's secure servers. We only ever show masked identifiers, and a
-          business that's already verified on Swaroop doesn't need to verify again.
+          Verification runs on Petrotrade's secure servers. We only ever show masked identifiers, and a
+          business that's already verified on Petrotrade doesn't need to verify again.
         </p>
       </div>
 
@@ -112,7 +112,7 @@ export function VerificationStep({
             ) : (
               <Clock aria-hidden="true" className="h-5 w-5 text-amber-600" />
             )}
-            {gst?.status === "VERIFIED" ? "Business verified" : "Verification under manual review — you can continue"}
+            {gst?.status === "VERIFIED" ? "Business verified" : "Verification under manual review - you can continue"}
           </p>
           <div className="mt-3">
             <VerificationSummary kyc={kyc} />

@@ -11,9 +11,9 @@ import manufacturingImage from "@/public/images/industry-manufacturing.webp";
 import refineryImage from "@/public/images/hero-refinery-granules.webp";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Swaroop",
+  title: "About Petrotrade",
   description:
-    "Swaroop is building India's connected platform for industrial materials — bringing verified supply, structured procurement, logistics and business credit together for buyers and sellers.",
+    "Petrotrade is building India's connected platform for industrial materials - bringing verified supply, structured procurement, logistics and business credit together for buyers and sellers.",
   path: "/about",
 });
 
@@ -21,26 +21,26 @@ const PRINCIPLES = [
   { icon: ShieldCheck, title: "Trust by design", detail: "Verification, standard grades and recorded order history are built into the platform, not bolted on." },
   { icon: Eye, title: "Transparency", detail: "Every order moves through visible stages, so buyers and sellers always know where things stand." },
   { icon: Scale, title: "Fairness", detail: "Confidential purchase requests and a neutral process keep the marketplace balanced for both sides." },
-  { icon: Handshake, title: "Long-term partnership", detail: "We succeed when our customers and suppliers grow — order after order." },
+  { icon: Handshake, title: "Long-term partnership", detail: "We succeed when our customers and suppliers grow - order after order." },
 ];
 
 const ECOSYSTEM = [
   { icon: Store, title: "Customer platform", detail: "Web and mobile apps for buyers to browse grades, request materials, pay, track orders and apply for credit." },
   { icon: Factory, title: "Seller platform", detail: "Inventory, offers, purchase-request responses, dispatch and settlements for verified suppliers." },
-  { icon: LayoutDashboard, title: "Operations & credit desk", detail: "Swaroop's internal teams manage verification, procurement, logistics and credit review." },
-  { icon: Smartphone, title: "One backend, every channel", detail: "Website, web apps and mobile app share the same secure Swaroop platform and data." },
+  { icon: LayoutDashboard, title: "Operations & credit desk", detail: "Petrotrade's internal teams manage verification, procurement, logistics and credit review." },
+  { icon: Smartphone, title: "One backend, every channel", detail: "Website, web apps and mobile app share the same secure Petrotrade platform and data." },
 ];
 
 export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About Swaroop"
+        eyebrow="About Petrotrade"
         breadcrumb={{ name: "About", path: "/about" }}
         image={refineryImage}
         imageAlt="Petrochemical plant behind a pile of polymer granules"
         title="We're rebuilding how India buys industrial materials."
-        description="Industrial procurement still runs on phone calls, scattered price lists and paperwork. Swaroop brings it onto one transparent, technology-driven platform."
+        description="Industrial procurement still runs on phone calls, scattered price lists and paperwork. Petrotrade brings it onto one transparent, technology-driven platform."
       />
 
       <section aria-labelledby="mission-heading" className="section bg-white">
@@ -52,12 +52,12 @@ export default function AboutPage() {
             />
             <div data-reveal className="mt-8 space-y-5 text-lg leading-relaxed text-ink-muted">
               <p>
-                Swaroop connects manufacturers, traders, contractors and suppliers of polymers,
+                Petrotrade connects manufacturers, traders, contractors and suppliers of polymers,
                 petrochemicals and industrial materials on a single platform.
               </p>
               <p>
                 We standardise what is being traded through our Grade Master, verify who is trading
-                it, and run every order through a structured process — from purchase request and
+                it, and run every order through a structured process - from purchase request and
                 commercial confirmation to payment, dispatch and delivery. For eligible buyers, we
                 add managed business credit.
               </p>
@@ -93,7 +93,7 @@ export default function AboutPage() {
 
       <section aria-labelledby="ecosystem-heading" className="section bg-white">
         <div className="container">
-          <SectionHeading eyebrow="The Swaroop ecosystem" title={<span id="ecosystem-heading">One platform, built for every participant.</span>} />
+          <SectionHeading eyebrow="The Petrotrade ecosystem" title={<span id="ecosystem-heading">One platform, built for every participant.</span>} />
           <ul className="mt-12 grid gap-4 sm:grid-cols-2">
             {ECOSYSTEM.map((item, index) => (
               <li key={item.title} data-reveal style={{ "--reveal-delay": `${(index % 2) * 80}ms` } as React.CSSProperties} className="card flex gap-5 p-7">

@@ -5,6 +5,7 @@ const ROUTES: { path: string; priority: number; changeFrequency: "weekly" | "mon
   { path: "/", priority: 1, changeFrequency: "weekly" },
   { path: "/materials", priority: 0.9, changeFrequency: "monthly" },
   { path: "/buy-sell", priority: 0.9, changeFrequency: "monthly" },
+  { path: "/import", priority: 0.9, changeFrequency: "monthly" },
   { path: "/credit", priority: 0.9, changeFrequency: "monthly" },
   { path: "/request-credit", priority: 0.8, changeFrequency: "monthly" },
   { path: "/how-it-works", priority: 0.8, changeFrequency: "monthly" },

@@ -9,6 +9,7 @@ export type AnalyticsEvent =
   | "buy_cta_click"
   | "sell_cta_click"
   | "request_credit_click"
+  | "import_cta_click"
   | "credit_application_started"
   | "credit_application_submitted"
   | "contact_form_submitted"

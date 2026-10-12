@@ -10,7 +10,7 @@ const CARDS = [
   {
     icon: ClipboardCheck,
     title: "Apply using business details",
-    detail: "Your verified GST and PAN details are reused — just add your credit requirement.",
+    detail: "Your verified GST and PAN details are reused - just add your credit requirement.",
   },
   {
     icon: FileUp,
@@ -42,7 +42,7 @@ export function CreditSection({ headingLevel = "h2" }: { headingLevel?: "h1" | "
             capital and purchase industrial materials with confidence.
           </p>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-brand-100/60">
-            Every application is reviewed by the Swaroop credit team. Approval, limits and payment
+            Every application is reviewed by the Petrotrade credit team. Approval, limits and payment
             terms depend on eligibility and are never granted automatically.
           </p>
           <div className="mt-10 flex flex-wrap gap-3">

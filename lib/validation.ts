@@ -16,7 +16,7 @@ export function isValidPan(value: string): boolean {
   return PAN_PATTERN.test(value.trim().toUpperCase());
 }
 
-/** GSTIN characters 3–12 are the holder's PAN. */
+/** GSTIN characters 3-12 are the holder's PAN. */
 export function panFromGstin(gstin: string): string | null {
   const value = gstin.trim().toUpperCase();
   return isValidGstin(value) ? value.slice(2, 12) : null;

@@ -15,7 +15,7 @@ export function FaqSection({ items = FAQ_ITEMS, title = "Questions, answered." }
               <>
                 Can't find what you need?{" "}
                 <Link href="/contact" className="font-semibold text-accent-600 underline-offset-4 hover:underline">
-                  Talk to the Swaroop team
+                  Talk to the Petrotrade team
                 </Link>
                 .
               </>

@@ -95,10 +95,10 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: EnquiryTopic }) {
         <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50 text-emerald-600">
           <CircleCheck aria-hidden="true" className="h-7 w-7" />
         </span>
-        <h2 className="mt-6 text-2xl font-semibold">Thanks — we've received your message.</h2>
+        <h2 className="mt-6 text-2xl font-semibold">Thanks - we've received your message.</h2>
         <p className="mt-3 text-ink-muted">
           Your reference number is <span className="font-semibold text-brand-800">{reference}</span>.
-          The Swaroop team will get back to you at {fields.email.trim()}.
+          The Petrotrade team will get back to you at {fields.email.trim()}.
         </p>
         <Button
           variant="ghost"
@@ -148,7 +148,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: EnquiryTopic }) {
           </select>
         </Field>
         <Field id="contact-message" label="Message" required error={errors.message} className="sm:col-span-2" hint={`${fields.message.trim().length}/2000`}>
-          <textarea id="contact-message" rows={5} className="input resize-y" value={fields.message} onChange={update("message")} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? "contact-message-error" : "contact-message-hint"} placeholder="Materials, grades, quantities, delivery location — anything that helps us respond quickly." maxLength={2000} />
+          <textarea id="contact-message" rows={5} className="input resize-y" value={fields.message} onChange={update("message")} aria-invalid={Boolean(errors.message)} aria-describedby={errors.message ? "contact-message-error" : "contact-message-hint"} placeholder="Materials, grades, quantities, delivery location - anything that helps us respond quickly." maxLength={2000} />
         </Field>
         <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
           <label htmlFor="contact-website">Website</label>
