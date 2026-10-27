@@ -1,35 +1,35 @@
 /**
  * Answers follow the business rules implemented in Swaroop-Backend
- * (Grade Master, blind purchase requests, PetroTrade credit workflow,
+ * (Grade Master, blind purchase requests, PolyStoreX credit workflow,
  * Surepass-backed KYC, shipment milestones).
  */
 export type FaqItem = { question: string; answer: string };
 
 export const FAQ_ITEMS: FaqItem[] = [
   {
-    question: "What materials does Petrotrade supply?",
+    question: "What materials does PolyStoreX supply?",
     answer:
-      "Petrotrade covers polymers (HDPE, LDPE, LLDPE, PP, PET, PVC, ABS, HIPS, Nylon, EVA, POM, PC and more), compounds, masterbatch, elastomers, industrial chemicals, solvents, intermediates, recycled grades, base oils and specialty polymers. Every listing maps to a grade in the Petrotrade Grade Master, so you always know exactly what you are buying.",
+      "PolyStoreX covers polymers (HDPE, LDPE, LLDPE, PP, PET, PVC, ABS, HIPS, Nylon, EVA, POM, PC and more), compounds, masterbatch, elastomers, industrial chemicals, solvents, intermediates, recycled grades, base oils and specialty polymers. Every listing maps to a grade in the PolyStoreX Grade Master, so you always know exactly what you are buying.",
   },
   {
     question: "How can I buy materials?",
     answer:
-      "Create a customer account, complete business verification, then browse grades and the offers available against them. You can add an offer to your cart or raise a purchase request with your quantity, delivery location and payment preference. Petrotrade confirms the commercial terms with you before anything is dispatched.",
+      "Create a customer account, complete business verification, then browse grades and the offers available against them. You can add an offer to your cart or raise a purchase request with your quantity, delivery location and payment preference. PolyStoreX confirms the commercial terms with you before anything is dispatched.",
   },
   {
     question: "How can I sell materials?",
     answer:
-      "Register on the Petrotrade seller platform and complete seller verification. Once approved, you can manage inventory, publish offers against Grade Master grades, respond to purchase requests and track your orders and settlements from one dashboard.",
+      "Register on the PolyStoreX seller platform and complete seller verification. Once approved, you can manage inventory, publish offers against Grade Master grades, respond to purchase requests and track your orders and settlements from one dashboard.",
   },
   {
     question: "How does procurement work?",
     answer:
-      "You choose a grade, review the available offers and submit a purchase request. Petrotrade's procurement team works the request, confirms price, quantity and terms with you, and then moves the order through payment, dispatch and delivery. Buyer and seller identities are kept confidential during the request stage.",
+      "You choose a grade, review the available offers and submit a purchase request. PolyStoreX's procurement team works the request, confirms price, quantity and terms with you, and then moves the order through payment, dispatch and delivery. Buyer and seller identities are kept confidential during the request stage.",
   },
   {
     question: "How does credit work?",
     answer:
-      "Eligible businesses can apply for a managed credit line. You submit your requirement and financial documents, and Petrotrade's credit team reviews the application - this can include document verification and a credit insurance review. If approved, the sanctioned limit and payment terms become available at checkout. Applications are never approved automatically.",
+      "Eligible businesses can apply for a managed credit line. You submit your requirement and financial documents, and PolyStoreX's credit team reviews the application - this can include document verification and a credit insurance review. If approved, the sanctioned limit and payment terms become available at checkout. Applications are never approved automatically.",
   },
   {
     question: "What documents are required for credit?",
@@ -39,35 +39,35 @@ export const FAQ_ITEMS: FaqItem[] = [
   {
     question: "How is KYC handled?",
     answer:
-      "Your GSTIN and PAN are verified server-side by Petrotrade through its verification partner - never from your browser - and only masked values are shown back to you. Supporting documents are stored securely and reviewed by the Petrotrade compliance team before your account is approved.",
+      "Your GSTIN and PAN are verified server-side by PolyStoreX through its verification partner - never from your browser - and only masked values are shown back to you. Supporting documents are stored securely and reviewed by the PolyStoreX compliance team before your account is approved.",
   },
   {
     question: "How are orders tracked?",
     answer:
-      "Every order moves through a transparent lifecycle - commercial confirmation, payment, dispatch, shipment and delivery - and each milestone is visible in your Petrotrade dashboard together with its documents, such as invoices and delivery records.",
+      "Every order moves through a transparent lifecycle - commercial confirmation, payment, dispatch, shipment and delivery - and each milestone is visible in your PolyStoreX dashboard together with its documents, such as invoices and delivery records.",
   },
   {
     question: "How does delivery work?",
     answer:
-      "Once an order is confirmed and paid (or placed on approved credit), Petrotrade coordinates dispatch from the supplier and shares shipment details and status updates until delivery. Serviceability and delivery timelines are confirmed for each order during commercial confirmation.",
+      "Once an order is confirmed and paid (or placed on approved credit), PolyStoreX coordinates dispatch from the supplier and shares shipment details and status updates until delivery. Serviceability and delivery timelines are confirmed for each order during commercial confirmation.",
   },
   {
-    question: "How can I contact Petrotrade?",
+    question: "How can I contact PolyStoreX?",
     answer:
-      "Use the contact form on this website and our team will respond to you. Existing customers and sellers can also raise a support ticket from inside their Petrotrade dashboard.",
+      "Use the contact form on this website and our team will respond to you. Existing customers and sellers can also raise a support ticket from inside their PolyStoreX dashboard.",
   },
 ];
 
 export const IMPORT_FAQ_ITEMS: FaqItem[] = [
   {
-    question: "What is import trading on Petrotrade?",
+    question: "What is import trading on PolyStoreX?",
     answer:
-      "Import trading connects Indian buyers with sellers offering imported polymers and petrochemicals. Buyers post an import buy requirement, sellers publish import sell offers, and Petrotrade matches the two, hosts the negotiation and tracks the shipment from the port of loading to delivery.",
+      "Import trading connects Indian buyers with sellers offering imported polymers and petrochemicals. Buyers post an import buy requirement, sellers publish import sell offers, and PolyStoreX matches the two, hosts the negotiation and tracks the shipment from the port of loading to delivery.",
   },
   {
     question: "Who can post import requirements and offers?",
     answer:
-      "Buyers post import requirements from the Petrotrade customer platform, and sellers publish import offers from the seller platform. Both need a verified Petrotrade business account.",
+      "Buyers post import requirements from the PolyStoreX customer platform, and sellers publish import offers from the seller platform. Both need a verified PolyStoreX business account.",
   },
   {
     question: "How are buyers and sellers matched?",

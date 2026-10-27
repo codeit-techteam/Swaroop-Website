@@ -7,7 +7,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Track Credit Application",
-  description: "Track the status of your Petrotrade business credit application.",
+  description: "Track the status of your PolyStoreX business credit application.",
   path: "/request-credit/track",
   noIndex: true,
 });

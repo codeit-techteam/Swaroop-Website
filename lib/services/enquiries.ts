@@ -2,7 +2,7 @@ import { apiRequest } from "@/lib/api-client";
 
 export const ENQUIRY_TOPICS = [
   { value: "BUY_MATERIALS", label: "Buying materials" },
-  { value: "SELL_MATERIALS", label: "Selling on Petrotrade" },
+  { value: "SELL_MATERIALS", label: "Selling on PolyStoreX" },
   { value: "CREDIT", label: "Business credit" },
   { value: "LOGISTICS", label: "Logistics & delivery" },
   { value: "PARTNERSHIP", label: "Partnership" },

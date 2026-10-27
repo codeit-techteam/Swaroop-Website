@@ -15,7 +15,7 @@ export function Benefits() {
     <section aria-labelledby="benefits-heading" className="section bg-white">
       <div className="container">
         <SectionHeading
-          eyebrow="Why Petrotrade"
+          eyebrow="Why PolyStoreX"
           align="center"
           title={<span id="benefits-heading">Built for the way industry actually buys.</span>}
         />

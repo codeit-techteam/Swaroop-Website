@@ -13,7 +13,7 @@ export const PROCESS_STEPS = [
   {
     icon: ScanSearch,
     title: "Choose material",
-    detail: "Find the exact grade you need in the Petrotrade Grade Master.",
+    detail: "Find the exact grade you need in the PolyStoreX Grade Master.",
   },
   {
     icon: Handshake,
@@ -28,7 +28,7 @@ export const PROCESS_STEPS = [
   {
     icon: FileSignature,
     title: "Commercial confirmation",
-    detail: "Petrotrade confirms price, quantity and terms with you.",
+    detail: "PolyStoreX confirms price, quantity and terms with you.",
   },
   {
     icon: CreditCard,
@@ -55,7 +55,7 @@ export function ProcessTimeline({ headingLevel = "h2" }: { headingLevel?: "h1" |
       <div className="container relative">
         <SectionHeading
           as={headingLevel}
-          eyebrow="How Petrotrade works"
+          eyebrow="How PolyStoreX works"
           tone="light"
           align="center"
           title={<span id="process-heading">From grade selection to delivery in seven clear steps.</span>}

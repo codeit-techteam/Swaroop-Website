@@ -1,5 +1,5 @@
 /**
- * Website session tokens issued by the Petrotrade backend (`/auth/*`). The website
+ * Website session tokens issued by the PolyStoreX backend (`/auth/*`). The website
  * runs on its own origin, so it keeps its own copy of the session; identity is
  * always derived server-side from the bearer token.
  */

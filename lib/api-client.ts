@@ -48,7 +48,7 @@ export class ApiError extends Error {
 }
 
 const NETWORK_MESSAGE =
-  "We couldn't reach Petrotrade right now. Check your connection and try again.";
+  "We couldn't reach PolyStoreX right now. Check your connection and try again.";
 const SERVER_MESSAGE =
   "Something went wrong on our side. Please try again in a moment.";
 

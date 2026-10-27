@@ -130,7 +130,7 @@ export function SignInPanel({
         </span>
         <h2 className="mt-6 text-2xl font-semibold">{title}</h2>
         <p className="mt-2 text-[0.95rem] leading-relaxed text-ink-muted">
-          Use your Petrotrade buyer account. New to Petrotrade? Signing in with your mobile number creates
+          Use your PolyStoreX buyer account. New to PolyStoreX? Signing in with your mobile number creates
           your buyer account.
         </p>
 

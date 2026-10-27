@@ -4,7 +4,7 @@ import { TrackedLink } from "@/components/ui/tracked-link";
 import heroImage from "@/public/images/hero-refinery-granules.webp";
 
 const FLOW = [
-  { icon: ScanSearch, title: "Grade selected", detail: "Matched to the Petrotrade Grade Master" },
+  { icon: ScanSearch, title: "Grade selected", detail: "Matched to the PolyStoreX Grade Master" },
   { icon: BadgeCheck, title: "Verified supplier offer", detail: "KYC-verified seller, confidential until confirmation" },
   { icon: FileCheck2, title: "Commercial confirmation", detail: "Price, quantity and terms agreed" },
   { icon: Truck, title: "Dispatch & shipment", detail: "Milestones and documents in one place" },

@@ -12,9 +12,9 @@ import { pageMetadata } from "@/lib/seo";
 import plantImage from "@/public/images/process-plant.webp";
 
 export const metadata: Metadata = pageMetadata({
-  title: "How Petrotrade Works - From Grade to Delivery",
+  title: "How PolyStoreX Works - From Grade to Delivery",
   description:
-    "See how industrial procurement works on Petrotrade: choose a grade, review verified offers, submit a purchase request, confirm terms, pay or use credit, and track dispatch through delivery.",
+    "See how industrial procurement works on PolyStoreX: choose a grade, review verified offers, submit a purchase request, confirm terms, pay or use credit, and track dispatch through delivery.",
   path: "/how-it-works",
 });
 
@@ -31,7 +31,7 @@ export default function HowItWorksPage() {
         image={plantImage}
         imageAlt="Stainless steel process piping in an industrial plant"
         title="Industrial buying, made structured and visible."
-        description="Every Petrotrade order follows the same transparent lifecycle - so you always know what happens next, and who is responsible for it."
+        description="Every PolyStoreX order follows the same transparent lifecycle - so you always know what happens next, and who is responsible for it."
       >
         <TrackedLink href={platformLinks.customerRegister} external event="platform_cta_click" eventProps={{ location: "how_hero", platform: "customer" }} size="lg" arrow>
           Get Started

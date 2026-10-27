@@ -88,5 +88,5 @@ export async function logout() {
 export function displayName(user: AuthUser | null): string {
   if (!user) return "";
   const name = [user.firstName, user.lastName].filter(Boolean).join(" ").trim();
-  return name || user.email || user.phone || "Petrotrade customer";
+  return name || user.email || user.phone || "PolyStoreX customer";
 }

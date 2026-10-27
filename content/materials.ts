@@ -1,5 +1,5 @@
 /**
- * Public marketing view of the Petrotrade Grade Master taxonomy
+ * Public marketing view of the PolyStoreX Grade Master taxonomy
  * (Swaroop-Backend `prisma/seed-data/master-data.normalized.json`).
  *
  * Only category families and typical applications are listed here - live

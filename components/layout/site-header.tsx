@@ -90,7 +90,7 @@ export function SiteHeader() {
         Skip to content
       </a>
       <div className="container flex h-[var(--header-h)] items-center justify-between gap-3 sm:gap-6">
-        <Link href="/" aria-label="Petrotrade home" className="rounded-lg">
+        <Link href="/" aria-label="PolyStoreX home" className="rounded-lg">
           <Logo
             tone={solid ? "dark" : "light"}
             wordmarkClassName="max-sm:text-[1rem] max-sm:tracking-[0.1em] max-[359px]:hidden"
@@ -218,7 +218,7 @@ export function SiteHeader() {
               variant="ghost"
               size="lg"
             >
-              Sell With Petrotrade
+              Sell With PolyStoreX
             </TrackedLink>
           </div>
         </nav>

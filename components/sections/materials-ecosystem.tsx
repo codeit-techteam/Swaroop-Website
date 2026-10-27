@@ -22,7 +22,7 @@ export function MaterialsEcosystem() {
                 <span className="text-ink-subtle">One industrial materials platform.</span>
               </span>
             }
-            description="Every material on Petrotrade maps to a grade in our Grade Master - ten material families, from commodity polymers to specialty chemicals."
+            description="Every material on PolyStoreX maps to a grade in our Grade Master - ten material families, from commodity polymers to specialty chemicals."
           />
           <TrackedLink
             href="/materials"

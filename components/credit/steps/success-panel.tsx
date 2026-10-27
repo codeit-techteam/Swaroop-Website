@@ -9,7 +9,7 @@ import { StatusBadge, SummaryList } from "../flow-ui";
 const NEXT_STEPS = [
   "Our credit team reviews your business profile and documents.",
   "If anything is missing, we'll ask you to upload it - you'll see this on the tracking page.",
-  "Once a decision is made, your approved limit and terms appear in your Petrotrade account.",
+  "Once a decision is made, your approved limit and terms appear in your PolyStoreX account.",
 ];
 
 const DEFAULT_MESSAGE =

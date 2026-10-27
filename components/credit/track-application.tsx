@@ -42,7 +42,7 @@ export function TrackApplication() {
   if (!hasCustomerRole(state.user)) {
     return (
       <Alert tone="warning" title="No buyer account found">
-        Credit applications belong to Petrotrade buyer accounts. Sign in with your buyer account to track one.
+        Credit applications belong to PolyStoreX buyer accounts. Sign in with your buyer account to track one.
       </Alert>
     );
   }

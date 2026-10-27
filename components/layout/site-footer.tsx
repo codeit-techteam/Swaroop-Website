@@ -36,7 +36,7 @@ export function SiteFooter() {
           <div className="max-w-xl">
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent-300">Connect with us</p>
             <h2 id="footer-connect-heading" className="mt-3 font-display text-2xl font-semibold text-white sm:text-3xl">
-              Talk to the Petrotrade team.
+              Talk to the PolyStoreX team.
             </h2>
             <p className="mt-3 text-[0.95rem] leading-relaxed text-brand-100/70">
               Sourcing, selling, import trading, credit or partnerships - send us a message and we'll
@@ -72,7 +72,7 @@ export function SiteFooter() {
               </ul>
             ) : null}
             {socials.length ? (
-              <ul className="flex gap-2" aria-label="Petrotrade on social media">
+              <ul className="flex gap-2" aria-label="PolyStoreX on social media">
                 {socials.map((social) => (
                   <li key={social.key}>
                     <a
@@ -95,7 +95,7 @@ export function SiteFooter() {
 
         <div className="grid gap-12 border-b border-white/10 py-16 lg:grid-cols-[1.2fr_2fr] lg:py-20">
           <div className="max-w-sm">
-            <Link href="/" aria-label="Petrotrade home" className="inline-block rounded-lg">
+            <Link href="/" aria-label="PolyStoreX home" className="inline-block rounded-lg">
               <Logo tone="light" />
             </Link>
             <p className="mt-6 text-[0.95rem] leading-relaxed text-brand-100/70">

@@ -23,7 +23,7 @@ import { pageMetadata } from "@/lib/seo";
 export const metadata: Metadata = pageMetadata({
   title: "Import Trading for Polymers & Petrochemicals",
   description:
-    "Import polymers and petrochemicals into India on Petrotrade. Post an import requirement or publish an import offer, get matched on grade, price, Incoterm and ports, negotiate anonymously and track every shipment to delivery.",
+    "Import polymers and petrochemicals into India on PolyStoreX. Post an import requirement or publish an import offer, get matched on grade, price, Incoterm and ports, negotiate anonymously and track every shipment to delivery.",
   path: "/import",
 });
 
@@ -109,7 +109,7 @@ export default function ImportPage() {
         eyebrow="Import trading"
         breadcrumb={{ name: "Import", path: "/import" }}
         title="Import polymers and petrochemicals with confidence."
-        description="Post what you need or what you can supply. Petrotrade matches international offers with Indian demand, hosts the negotiation and tracks every shipment from the port of loading to delivery."
+        description="Post what you need or what you can supply. PolyStoreX matches international offers with Indian demand, hosts the negotiation and tracks every shipment from the port of loading to delivery."
       >
         <TrackedLink href={platformLinks.customerImportBuy} external event="import_cta_click" eventProps={{ location: "import_hero", platform: "customer" }} size="lg" arrow>
           Post an import requirement

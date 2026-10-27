@@ -19,10 +19,11 @@ const display = Inter_Tight({
 
 export const metadata: Metadata = {
   metadataBase: new URL(env.siteUrl),
-  title: { default: SITE.title, template: "%s | Petrotrade" },
+  title: { default: SITE.title, template: `%s | ${SITE.name}` },
   description: SITE.description,
   applicationName: SITE.name,
   keywords: [
+    "PolyStoreX",
     "industrial materials",
     "polymers",
     "petrochemicals",
@@ -34,10 +35,14 @@ export const metadata: Metadata = {
     "India",
   ],
   formatDetection: { telephone: false, email: false, address: false },
+  icons: {
+    icon: [{ url: "/icon.svg" }, { url: "/icon.png" }],
+  },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0B2E59",
+  themeColor: "#00338D",
+
   width: "device-width",
   initialScale: 1,
 };

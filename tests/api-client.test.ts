@@ -67,7 +67,7 @@ describe("apiRequest", () => {
     await assert.rejects(apiRequest("/public/enquiries", { method: "POST", body: {}, auth: false }), (error) => {
       assert.ok(error instanceof ApiError);
       assert.equal(error.isNetwork, true);
-      assert.match(error.message, /couldn't reach Petrotrade/);
+      assert.match(error.message, /couldn't reach PolyStoreX/);
       return true;
     });
   });

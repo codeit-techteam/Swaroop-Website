@@ -11,9 +11,9 @@ import manufacturingImage from "@/public/images/industry-manufacturing.webp";
 import refineryImage from "@/public/images/hero-refinery-granules.webp";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About Petrotrade",
+  title: "About PolyStoreX",
   description:
-    "Petrotrade is building India's connected platform for industrial materials - bringing verified supply, structured procurement, logistics and business credit together for buyers and sellers.",
+    "PolyStoreX is building India's connected platform for industrial materials - bringing verified supply, structured procurement, logistics and business credit together for buyers and sellers.",
   path: "/about",
 });
 
@@ -27,20 +27,20 @@ const PRINCIPLES = [
 const ECOSYSTEM = [
   { icon: Store, title: "Customer platform", detail: "Web and mobile apps for buyers to browse grades, request materials, pay, track orders and apply for credit." },
   { icon: Factory, title: "Seller platform", detail: "Inventory, offers, purchase-request responses, dispatch and settlements for verified suppliers." },
-  { icon: LayoutDashboard, title: "Operations & credit desk", detail: "Petrotrade's internal teams manage verification, procurement, logistics and credit review." },
-  { icon: Smartphone, title: "One backend, every channel", detail: "Website, web apps and mobile app share the same secure Petrotrade platform and data." },
+  { icon: LayoutDashboard, title: "Operations & credit desk", detail: "PolyStoreX's internal teams manage verification, procurement, logistics and credit review." },
+  { icon: Smartphone, title: "One backend, every channel", detail: "Website, web apps and mobile app share the same secure PolyStoreX platform and data." },
 ];
 
 export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About Petrotrade"
+        eyebrow="About PolyStoreX"
         breadcrumb={{ name: "About", path: "/about" }}
         image={refineryImage}
         imageAlt="Petrochemical plant behind a pile of polymer granules"
         title="We're rebuilding how India buys industrial materials."
-        description="Industrial procurement still runs on phone calls, scattered price lists and paperwork. Petrotrade brings it onto one transparent, technology-driven platform."
+        description="Industrial procurement still runs on phone calls, scattered price lists and paperwork. PolyStoreX brings it onto one transparent, technology-driven platform."
       />
 
       <section aria-labelledby="mission-heading" className="section bg-white">
@@ -52,7 +52,7 @@ export default function AboutPage() {
             />
             <div data-reveal className="mt-8 space-y-5 text-lg leading-relaxed text-ink-muted">
               <p>
-                Petrotrade connects manufacturers, traders, contractors and suppliers of polymers,
+                PolyStoreX connects manufacturers, traders, contractors and suppliers of polymers,
                 petrochemicals and industrial materials on a single platform.
               </p>
               <p>
@@ -93,7 +93,7 @@ export default function AboutPage() {
 
       <section aria-labelledby="ecosystem-heading" className="section bg-white">
         <div className="container">
-          <SectionHeading eyebrow="The Petrotrade ecosystem" title={<span id="ecosystem-heading">One platform, built for every participant.</span>} />
+          <SectionHeading eyebrow="The PolyStoreX ecosystem" title={<span id="ecosystem-heading">One platform, built for every participant.</span>} />
           <ul className="mt-12 grid gap-4 sm:grid-cols-2">
             {ECOSYSTEM.map((item, index) => (
               <li key={item.title} data-reveal style={{ "--reveal-delay": `${(index % 2) * 80}ms` } as React.CSSProperties} className="card flex gap-5 p-7">

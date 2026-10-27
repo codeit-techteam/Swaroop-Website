@@ -10,7 +10,7 @@ export default function GlobalError({ reset }: { error: Error & { digest?: strin
         <p className="eyebrow justify-center">Something went wrong</p>
         <h1 className="mt-5 text-display-md font-semibold">We hit an unexpected problem.</h1>
         <p className="mt-4 text-lg text-ink-muted">
-          Please try again. If the problem continues, contact the Petrotrade team.
+          Please try again. If the problem continues, contact the PolyStoreX team.
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           <Button onClick={reset} size="lg">

@@ -99,8 +99,8 @@ export function VerificationStep({
       <div className="flex items-start gap-3 rounded-xl bg-paper p-4 text-sm text-ink-muted">
         <ShieldCheck aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-accent" />
         <p>
-          Verification runs on Petrotrade's secure servers. We only ever show masked identifiers, and a
-          business that's already verified on Petrotrade doesn't need to verify again.
+          Verification runs on PolyStoreX's secure servers. We only ever show masked identifiers, and a
+          business that's already verified on PolyStoreX doesn't need to verify again.
         </p>
       </div>
 

@@ -15,7 +15,8 @@ export function absoluteUrl(path = "/"): string {
 }
 
 export function pageMetadata({ title, description, path, image, noIndex }: PageMeta): Metadata {
-  const fullTitle = path === "/" ? SITE.title : `${title} | Petrotrade`;
+  const fullTitle = path === "/" ? SITE.title : `${title} | ${SITE.name}`;
+
   const ogImage = image ?? "/opengraph-image";
   return {
     title: { absolute: fullTitle },

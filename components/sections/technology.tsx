@@ -27,7 +27,7 @@ export function Technology() {
         <SectionHeading
           eyebrow="Technology"
           title={<span id="tech-heading">Industrial procurement, rebuilt for speed.</span>}
-          description="Petrotrade brings procurement, inventory, pricing, logistics and finance into one connected ecosystem - so buyers, sellers and our operations team work from the same source of truth."
+          description="PolyStoreX brings procurement, inventory, pricing, logistics and finance into one connected ecosystem - so buyers, sellers and our operations team work from the same source of truth."
         />
         <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {FEATURES.map((feature, index) => (

@@ -91,8 +91,8 @@ function NotCustomer({ user }: { user: AuthUser }) {
     <div className="mx-auto max-w-xl">
       <AccountBar user={user} />
       <Alert tone="warning" title="This account isn't set up as a buyer">
-        Business credit is available to Petrotrade buyer accounts. Register a buyer account, or sign in with
-        the mobile number you use to buy on Petrotrade.
+        Business credit is available to PolyStoreX buyer accounts. Register a buyer account, or sign in with
+        the mobile number you use to buy on PolyStoreX.
         <div className="mt-4 flex flex-wrap gap-3">
           <ExternalButton href={platformLinks.customerRegister} size="sm">
             Create a buyer account
@@ -216,7 +216,7 @@ function ExistingApplication({ application, approved = false }: { application: C
       </h2>
       <p className="mt-3 max-w-xl text-ink-muted">
         {approved
-          ? `An approved limit of ${formatInr(Number(application.approvedLimit ?? 0))} is available in your Petrotrade account. To request a revised limit, contact the credit team.`
+          ? `An approved limit of ${formatInr(Number(application.approvedLimit ?? 0))} is available in your PolyStoreX account. To request a revised limit, contact the credit team.`
           : `Requested ${formatInr(Number(application.requestedLimit))}${
               application.submittedAt ? ` on ${formatDate(application.submittedAt)}` : ""
             }. You can follow its progress and respond to document requests from the tracking page.`}
@@ -475,7 +475,7 @@ function Wizard({
               onBlockingChange={setDocsBlocking}
             />
             <p className="mt-4 text-sm text-ink-subtle">
-              PDF, JPG, PNG or WebP, up to 10 MB each. Files go directly to Petrotrade's secure storage.
+              PDF, JPG, PNG or WebP, up to 10 MB each. Files go directly to PolyStoreX's secure storage.
             </p>
             {docsError ? <Alert tone="error" className="mt-4">{docsError}</Alert> : null}
             {!docsReady && application.missingDocuments.length > 0 ? (

@@ -103,12 +103,12 @@ export function MarketplaceBanner() {
           <a
             href={platformLinks.customerHome}
             rel="noopener"
-            aria-label="Open the Petrotrade marketplace"
+            aria-label="Open the PolyStoreX marketplace"
             className="group relative block rounded-3xl focus-visible:ring-offset-4"
           >
             <Image
               src={dashboard}
-              alt="Petrotrade customer web portal dashboard showing the blind marketplace, live market prices per grade, available credit and import trading."
+              alt="PolyStoreX customer web portal dashboard showing the blind marketplace, live market prices per grade, available credit and import trading."
               sizes="(min-width: 1024px) 900px, 100vw"
               className="relative h-auto w-full select-none transition-transform duration-700 ease-out group-hover:-translate-y-1 group-hover:scale-[1.01] [mask-image:linear-gradient(to_bottom,transparent,#000_5%,#000_93%,transparent),linear-gradient(to_right,transparent,#000_5%,#000_97%,transparent)] [mask-composite:intersect] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_5%,#000_93%,transparent),linear-gradient(to_right,transparent,#000_5%,#000_97%,transparent)] [-webkit-mask-composite:source-in]"
             />

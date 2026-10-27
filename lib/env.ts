@@ -2,12 +2,13 @@
  * Browser-safe configuration only. Never add secrets here: every
  * NEXT_PUBLIC_* value is inlined into the client bundle.
  *
- * Fallbacks are the deployed Petrotrade production endpoints (the same values the
+ * Fallbacks are the deployed PolyStoreX production endpoints (the same values the
  * Customer / Seller / Admin web apps ship with), so a production build can never
  * silently point at localhost.
  */
 const PRODUCTION_DEFAULTS = {
-  siteUrl: "https://swaroop-website.vercel.app",
+  // Deployed Vercel host (swaroop-website.vercel.app currently 404s; petrotrade.in is parked).
+  siteUrl: "https://swaroop-website-mocha.vercel.app",
   apiBaseUrl: "https://swaroop-backend-xzwkz.ondigitalocean.app/api/v1",
   customerAppUrl: "https://swaroop-customer-webapp.vercel.app",
   sellerAppUrl: "https://swaroop-seller-webapp.vercel.app",

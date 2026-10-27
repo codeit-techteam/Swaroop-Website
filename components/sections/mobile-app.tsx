@@ -115,7 +115,7 @@ export function MobileApp() {
           />
           <Image
             src={showcase}
-            alt="Petrotrade app on a phone held in hand, surrounded by features: your locations, brand promotion, news and insights, order tracking, support, grade search, favourites and profile."
+            alt="PolyStoreX app on a phone held in hand, surrounded by features: your locations, brand promotion, news and insights, order tracking, support, grade search, favourites and profile."
             sizes="(min-width: 1024px) 740px, 100vw"
             className="relative h-auto w-full select-none [mask-image:linear-gradient(to_bottom,transparent,#000_6%,#000_92%,transparent),linear-gradient(to_right,transparent,#000_6%,#000_96%,transparent)] [mask-composite:intersect] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_6%,#000_92%,transparent),linear-gradient(to_right,transparent,#000_6%,#000_96%,transparent)] [-webkit-mask-composite:source-in]"
           />

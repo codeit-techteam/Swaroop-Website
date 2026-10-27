@@ -6,7 +6,7 @@ import logisticsImage from "@/public/images/logistics-hub.webp";
 const STAGES = ["Purchase", "Commercial confirmation", "Dispatch", "Shipment", "Delivery"];
 
 const FEATURES = [
-  { icon: Route, title: "Delivery coordination", detail: "Petrotrade coordinates pickup and delivery for each confirmed order." },
+  { icon: Route, title: "Delivery coordination", detail: "PolyStoreX coordinates pickup and delivery for each confirmed order." },
   { icon: PackageSearch, title: "Shipment tracking", detail: "Follow shipment status updates and milestones from your dashboard." },
   { icon: FileText, title: "Documentation", detail: "Invoices and transport documents travel with every shipment." },
   { icon: Truck, title: "Dispatch management", detail: "Dispatch is planned against confirmed quantities and locations." },

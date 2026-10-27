@@ -4,7 +4,7 @@ import { SectionHeading } from "@/components/ui/section-heading";
 /**
  * Abstract network diagram of India's major industrial clusters. Positions are
  * schematic (not a boundary map) and the clusters describe where industrial
- * demand sits - not confirmed Petrotrade facilities.
+ * demand sits - not confirmed PolyStoreX facilities.
  */
 const HUBS = [
   { id: "ncr", label: "Delhi NCR", region: "North", x: 205, y: 118 },
@@ -56,7 +56,7 @@ export function NetworkSection() {
           <SectionHeading
             eyebrow="Pan-India network"
             title={<span id="network-heading">Built for India's industrial corridors.</span>}
-            description="Petrotrade is designed for pan-India procurement - connecting verified supply with buyers across the country's major manufacturing regions."
+            description="PolyStoreX is designed for pan-India procurement - connecting verified supply with buyers across the country's major manufacturing regions."
           />
           <ul className="mt-10 grid gap-6 sm:grid-cols-2">
             {LEGEND.map((item, index) => (
@@ -77,7 +77,7 @@ export function NetworkSection() {
             ))}
           </ul>
           <p data-reveal className="mt-8 border-l-2 border-accent/40 pl-4 text-sm leading-relaxed text-ink-subtle">
-            Clusters shown are major industrial regions, not a list of Petrotrade facilities.
+            Clusters shown are major industrial regions, not a list of PolyStoreX facilities.
             Serviceability, warehousing and delivery timelines are confirmed for each order.
           </p>
         </div>
@@ -91,7 +91,7 @@ export function NetworkSection() {
               aria-labelledby="network-title network-desc"
               className="relative h-auto w-full"
             >
-              <title id="network-title">Petrotrade industrial network</title>
+              <title id="network-title">PolyStoreX industrial network</title>
               <desc id="network-desc">
                 Schematic diagram linking India's major industrial clusters: Delhi NCR, Ahmedabad,
                 Indore, Mumbai, Pune, Kolkata, Hyderabad, Bengaluru and Chennai.

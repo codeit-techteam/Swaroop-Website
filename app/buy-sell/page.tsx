@@ -13,7 +13,7 @@ import warehouseImage from "@/public/images/warehouse.webp";
 export const metadata: Metadata = pageMetadata({
   title: "Buy & Sell Industrial Materials",
   description:
-    "Buy polymers and petrochemicals from verified suppliers, or reach qualified industrial buyers as a seller - with structured procurement, logistics and settlements on Petrotrade.",
+    "Buy polymers and petrochemicals from verified suppliers, or reach qualified industrial buyers as a seller - with structured procurement, logistics and settlements on PolyStoreX.",
   path: "/buy-sell",
 });
 
@@ -30,13 +30,13 @@ export default function BuySellPage() {
         image={warehouseImage}
         imageAlt="Warehouse stocked with polymer sacks on pallets"
         title="A marketplace engineered for industrial trade."
-        description="Buyers source verified material against standard grades. Sellers reach qualified demand. Petrotrade manages confirmation, logistics and settlement in between."
+        description="Buyers source verified material against standard grades. Sellers reach qualified demand. PolyStoreX manages confirmation, logistics and settlement in between."
       >
         <TrackedLink href={platformLinks.customerRegister} external event="buy_cta_click" eventProps={{ location: "buy_sell_hero" }} size="lg" arrow>
           Start buying
         </TrackedLink>
         <TrackedLink href={platformLinks.sellerRegister} external event="sell_cta_click" eventProps={{ location: "buy_sell_hero" }} variant="outline-light" size="lg">
-          Sell With Petrotrade
+          Sell With PolyStoreX
         </TrackedLink>
       </PageHero>
       <BuySell showHeading={false} />

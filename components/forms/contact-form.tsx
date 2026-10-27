@@ -98,7 +98,7 @@ export function ContactForm({ defaultTopic }: { defaultTopic?: EnquiryTopic }) {
         <h2 className="mt-6 text-2xl font-semibold">Thanks - we've received your message.</h2>
         <p className="mt-3 text-ink-muted">
           Your reference number is <span className="font-semibold text-brand-800">{reference}</span>.
-          The Petrotrade team will get back to you at {fields.email.trim()}.
+          The PolyStoreX team will get back to you at {fields.email.trim()}.
         </p>
         <Button
           variant="ghost"

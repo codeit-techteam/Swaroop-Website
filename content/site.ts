@@ -1,9 +1,9 @@
 export const SITE = {
-  name: "Petrotrade",
-  legalName: "PETROTRADE",
-  title: "Petrotrade | Industrial Materials & B2B Procurement Platform",
+  name: "PolyStoreX",
+  legalName: "POLYSTOREX",
+  title: "PolyStoreX | Industrial Materials & B2B Procurement Platform",
   description:
-    "Petrotrade is a technology-driven B2B platform to source, trade and deliver polymers, petrochemicals and industrial materials across India - with verified supply, structured procurement and business credit.",
+    "PolyStoreX is a technology-driven B2B platform to source, trade and deliver polymers, petrochemicals and industrial materials across India - with verified supply, structured procurement and business credit.",
   tagline: "Industrial materials. Sourced smarter. Delivered better.",
 } as const;
 
@@ -20,11 +20,14 @@ export const PRIMARY_NAV: NavLink[] = [
   { href: "/contact", label: "Contact Us" },
 ];
 
-export const FOOTER_COLUMNS: { title: string; links: (NavLink & { external?: "customer" | "seller" })[] }[] = [
+export const FOOTER_COLUMNS: {
+  title: string;
+  links: (NavLink & { external?: "customer" | "seller" })[];
+}[] = [
   {
-    title: "Petrotrade",
+    title: "PolyStoreX",
     links: [
-      { href: "/about", label: "About Petrotrade" },
+      { href: "/about", label: "About PolyStoreX" },
       { href: "/contact", label: "Contact Us" },
       { href: "/about#careers", label: "Careers" },
     ],

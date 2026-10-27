@@ -12,7 +12,7 @@ import granulesImage from "@/public/images/polymer-granules.webp";
 export const metadata: Metadata = pageMetadata({
   title: "Materials - Polymers, Chemicals & Industrial Raw Materials",
   description:
-    "Explore the Petrotrade materials ecosystem: HDPE, LDPE, LLDPE, PP, PET, PVC, ABS and engineering plastics, plus compounds, masterbatch, elastomers, chemicals, solvents, intermediates, recycled grades, base oils and specialty polymers.",
+    "Explore the PolyStoreX materials ecosystem: HDPE, LDPE, LLDPE, PP, PET, PVC, ABS and engineering plastics, plus compounds, masterbatch, elastomers, chemicals, solvents, intermediates, recycled grades, base oils and specialty polymers.",
   path: "/materials",
 });
 
@@ -27,7 +27,7 @@ export default function MaterialsPage() {
         image={granulesImage}
         imageAlt="Polymer resin granules"
         title="One Grade Master. Ten material families."
-        description="Every material traded on Petrotrade is mapped to a standardised grade - so buyers compare like for like, and sellers list against specifications buyers already trust."
+        description="Every material traded on PolyStoreX is mapped to a standardised grade - so buyers compare like for like, and sellers list against specifications buyers already trust."
       >
         <TrackedLink
           href={platformLinks.customerMarketplace}
@@ -115,7 +115,7 @@ export default function MaterialsPage() {
               <h2 className="text-2xl font-semibold">Looking for a specific grade?</h2>
               <p className="mt-2 max-w-2xl text-ink-muted">
                 Live grades, manufacturers and offers are available to verified buyers inside the
-                Petrotrade customer platform.
+                PolyStoreX customer platform.
               </p>
             </div>
             <TrackedLink

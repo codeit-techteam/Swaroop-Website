@@ -7,9 +7,9 @@ import { env, platformLinks } from "@/lib/env";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Contact Petrotrade",
+  title: "Contact PolyStoreX",
   description:
-    "Talk to Petrotrade about sourcing materials, selling on the platform, business credit, logistics or partnerships.",
+    "Talk to PolyStoreX about sourcing materials, selling on the platform, business credit, logistics or partnerships.",
   path: "/contact",
 });
 
@@ -28,7 +28,7 @@ export default async function ContactPage({
         eyebrow="Contact"
         breadcrumb={{ name: "Contact", path: "/contact" }}
         title="Let's talk about your materials."
-        description="Whether you're sourcing, selling, or exploring credit, the Petrotrade team will route your message to the right desk."
+        description="Whether you're sourcing, selling, or exploring credit, the PolyStoreX team will route your message to the right desk."
       />
       <section className="section bg-paper">
         <div className="container grid gap-10 lg:grid-cols-[1.4fr_0.8fr] lg:gap-14">
@@ -38,7 +38,7 @@ export default async function ContactPage({
               <Clock aria-hidden="true" className="h-5 w-5 text-accent" />
               <h2 className="mt-4 text-lg font-semibold">What happens next</h2>
               <p className="mt-2 text-[0.95rem] leading-relaxed text-ink-muted">
-                Your enquiry is logged with a reference number and reviewed by the Petrotrade team, who
+                Your enquiry is logged with a reference number and reviewed by the PolyStoreX team, who
                 will respond by email or phone.
               </p>
             </div>

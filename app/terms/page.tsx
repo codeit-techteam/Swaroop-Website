@@ -5,7 +5,7 @@ import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "Terms of Use",
-  description: "Terms governing the use of the Petrotrade website and platform.",
+  description: "Terms governing the use of the PolyStoreX website and platform.",
   path: "/terms",
 });
 
@@ -15,7 +15,7 @@ const SECTIONS: LegalSection[] = [
     title: "Acceptance",
     body: (
       <p>
-        By using the Petrotrade website or platform you agree to these terms. If you use Petrotrade on behalf
+        By using the PolyStoreX website or platform you agree to these terms. If you use PolyStoreX on behalf
         of a business, you confirm you are authorised to bind that business.
       </p>
     ),
@@ -26,7 +26,7 @@ const SECTIONS: LegalSection[] = [
     body: (
       <ul>
         <li>You must provide accurate business information and keep it up to date.</li>
-        <li>Petrotrade may verify GSTIN, PAN and business documents, and may refuse or suspend access where verification fails.</li>
+        <li>PolyStoreX may verify GSTIN, PAN and business documents, and may refuse or suspend access where verification fails.</li>
         <li>You are responsible for activity under your account and for keeping sign-in credentials secure.</li>
       </ul>
     ),
@@ -48,7 +48,7 @@ const SECTIONS: LegalSection[] = [
     body: (
       <ul>
         <li>Submitting a credit application does not guarantee approval.</li>
-        <li>Approval, limits, tenure and payment terms are decided by Petrotrade after review and may change.</li>
+        <li>Approval, limits, tenure and payment terms are decided by PolyStoreX after review and may change.</li>
         <li>Applicants must provide genuine documents; false or misleading information may lead to rejection and account suspension.</li>
       </ul>
     ),
@@ -68,7 +68,7 @@ const SECTIONS: LegalSection[] = [
     title: "Liability",
     body: (
       <p>
-        The website is provided for general information. To the extent permitted by law, Petrotrade is not
+        The website is provided for general information. To the extent permitted by law, PolyStoreX is not
         liable for indirect or consequential losses arising from its use.
       </p>
     ),
@@ -95,7 +95,7 @@ export default function TermsPage() {
       breadcrumb="Terms"
       path="/terms"
       updated="8 October 2026"
-      intro={<p>These terms govern your use of the Petrotrade website and the Petrotrade platform.</p>}
+      intro={<p>These terms govern your use of the PolyStoreX website and the PolyStoreX platform.</p>}
       sections={SECTIONS}
     />
   );
