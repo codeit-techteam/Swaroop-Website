@@ -39,17 +39,36 @@ export async function sendOtp(identifier: OtpIdentifier) {
   });
 }
 
+const DEMO_PHONE_LAST10 = "8240890242";
+const DEMO_OTP = "123456";
+const DEMO_PASSWORD = "Test@12345";
+
+function isDevDemoOtp(identifier: OtpIdentifier, otp: string): boolean {
+  if (otp !== DEMO_OTP || !("phone" in identifier)) return false;
+  return identifier.phone.replace(/\D/g, "").slice(-10) === DEMO_PHONE_LAST10;
+}
+
 export async function verifyOtp(identifier: OtpIdentifier, otp: string) {
-  const session = await apiRequest<SessionPayload>("/auth/otp/verify", {
-    method: "POST",
-    auth: false,
-    body: { ...identifier, otp, purpose: "LOGIN", roleHint: "CUSTOMER" },
-  });
-  writeSession({
-    accessToken: session.accessToken,
-    refreshToken: session.refreshToken ?? null,
-  });
-  return session.user;
+  try {
+    const session = await apiRequest<SessionPayload>("/auth/otp/verify", {
+      method: "POST",
+      auth: false,
+      body: { ...identifier, otp, purpose: "LOGIN", roleHint: "CUSTOMER" },
+    });
+    writeSession({
+      accessToken: session.accessToken,
+      refreshToken: session.refreshToken ?? null,
+    });
+    return session.user;
+  } catch (error) {
+    // Development phase: demo phone + 123456 → known password if fixed OTP is off.
+    if (!isDevDemoOtp(identifier, otp)) throw error;
+    try {
+      return await loginWithPassword(identifier, DEMO_PASSWORD);
+    } catch {
+      throw error;
+    }
+  }
 }
 
 export async function loginWithPassword(identifier: OtpIdentifier, password: string) {
