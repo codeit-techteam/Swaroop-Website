@@ -7,8 +7,8 @@
  * silently point at localhost.
  */
 const PRODUCTION_DEFAULTS = {
-  // Deployed Vercel host (swaroop-website.vercel.app currently 404s; petrotrade.in is parked).
-  siteUrl: "https://swaroop-website-mocha.vercel.app",
+  // Official domain. /terms, /privacy and /contact return 200.
+  siteUrl: "https://polystorex.com",
   apiBaseUrl: "https://swaroop-backend-xzwkz.ondigitalocean.app/api/v1",
   customerAppUrl: "https://swaroop-customer-webapp.vercel.app",
   sellerAppUrl: "https://swaroop-seller-webapp.vercel.app",
