@@ -4,7 +4,7 @@ import { SITE } from "@/content/site";
 
 type LogoProps = {
   className?: string;
-  /** `dark` = dark text on light surfaces; `light` = light lockup on dark surfaces. */
+  /** `dark` = dark text on light surfaces; `light` = light text on dark surfaces. */
   tone?: "dark" | "light";
   showWordmark?: boolean;
   wordmarkClassName?: string;
@@ -31,11 +31,10 @@ export function LogoMark({
 }
 
 /**
- * Production navbar/footer logo.
+ * Navbar/footer logo: orbit mark + CSS wordmark.
  *
- * Light surfaces: orbit mark + navy/gold CSS wordmark (the client PNG uses a white
- * wordmark, which disappears on white headers when the black plate is removed).
- * Dark surfaces: full transparent lockup (white wordmark readable on navy).
+ * The client lockup PNG uses a white wordmark, which disappears on white headers.
+ * Always render the mark + toned wordmark so the brand stays visible on light and dark surfaces.
  */
 export function Logo({
   className,
@@ -46,42 +45,34 @@ export function Logo({
 }: LogoProps) {
   const onDarkSurface = tone === "light";
 
-  if (variant === "mark" || !showWordmark || !onDarkSurface) {
+  if (variant === "mark" || !showWordmark) {
     return (
-      <span className={cn("inline-flex items-center gap-2.5", className)}>
+      <span className={cn("inline-flex items-center", className)}>
         <LogoMark />
-        {showWordmark ? (
-          <span
-            className={cn(
-              "font-display text-[1.2rem] font-semibold tracking-[0.04em]",
-              onDarkSurface ? "text-white" : "text-brand",
-              wordmarkClassName,
-            )}
-          >
-            PolyStore
-            <span className={onDarkSurface ? "text-accent" : "text-accent-600"}>X</span>
-          </span>
-        ) : null}
       </span>
     );
   }
 
-  // Dark footer / transparent header over hero imagery
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-xl bg-black/30 px-2.5 py-1.5 ring-1 ring-white/15",
+        "inline-flex items-center gap-2.5",
+        onDarkSurface && "rounded-xl bg-black/25 px-2 py-1 ring-1 ring-white/15",
         className,
       )}
+      aria-label={SITE.name}
     >
-      <Image
-        src="/brand/polystorex-logo-transparent.png"
-        alt={SITE.name}
-        width={220}
-        height={110}
-        className="h-9 w-auto max-w-[180px] object-contain object-left sm:h-10 sm:max-w-[210px]"
-        priority
-      />
+      <LogoMark />
+      <span
+        className={cn(
+          "font-display text-[1.2rem] font-semibold tracking-[0.04em]",
+          onDarkSurface ? "text-white" : "text-brand",
+          wordmarkClassName,
+        )}
+      >
+        PolyStore
+        <span className={onDarkSurface ? "text-accent" : "text-accent-600"}>X</span>
+      </span>
     </span>
   );
 }
