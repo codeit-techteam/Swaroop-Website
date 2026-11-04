@@ -1,5 +1,10 @@
 import type { MetadataRoute } from "next";
-import { absoluteUrl } from "@/lib/seo";
+
+/**
+ * Production sitemap only. Hardcoded WWW host so a mis-set
+ * NEXT_PUBLIC_SITE_URL=http://localhost:3004 can never leak again.
+ */
+const SITE = "https://www.polystorex.com";
 
 const ROUTES: { path: string; priority: number; changeFrequency: "weekly" | "monthly" | "yearly" }[] = [
   { path: "/", priority: 1, changeFrequency: "weekly" },
@@ -19,7 +24,7 @@ const ROUTES: { path: string; priority: number; changeFrequency: "weekly" | "mon
 export default function sitemap(): MetadataRoute.Sitemap {
   const lastModified = new Date();
   return ROUTES.map((route) => ({
-    url: absoluteUrl(route.path),
+    url: `${SITE}${route.path === "/" ? "" : route.path}`,
     lastModified,
     changeFrequency: route.changeFrequency,
     priority: route.priority,

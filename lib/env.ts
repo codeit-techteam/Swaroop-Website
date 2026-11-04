@@ -2,11 +2,12 @@
  * Browser-safe configuration only. Never add secrets here: every
  * NEXT_PUBLIC_* value is inlined into the client bundle.
  *
- * Customer / Seller panels default to branded production hosts. Override with
- * env when needed. Preview/localhost values are rejected.
+ * CRITICAL: Never allow localhost / vercel.app into siteUrl or sitemap —
+ * that previously shipped http://localhost:3004 into production sitemap.xml.
  */
 const PRODUCTION_DEFAULTS = {
   siteUrl: "https://polystorex.com",
+  /** Client-required sitemap / robots host. */
   sitemapHost: "https://www.polystorex.com",
   apiBaseUrl: "https://swaroop-backend-xzwkz.ondigitalocean.app/api/v1",
   customerAppUrl: "https://customer.polystorex.com",
@@ -24,7 +25,7 @@ function optional(value: string | undefined): string | null {
   return trimmed ? trimmed : null;
 }
 
-function isPreviewHost(url: string): boolean {
+function isPreviewOrLocalHost(url: string): boolean {
   try {
     const host = new URL(url).hostname.toLowerCase();
     return (
@@ -38,29 +39,36 @@ function isPreviewHost(url: string): boolean {
   }
 }
 
-function productionAppUrl(value: string | undefined, fallback: string): string {
+/** Reject localhost/preview so production SEO never emits local URLs. */
+function productionPublicUrl(value: string | undefined, fallback: string): string {
   const cleaned = clean(value);
-  if (!cleaned || isPreviewHost(cleaned)) return fallback;
+  if (!cleaned || isPreviewOrLocalHost(cleaned)) return fallback;
   return cleaned;
 }
 
 export const env = {
-  siteUrl: clean(process.env.NEXT_PUBLIC_SITE_URL) ?? PRODUCTION_DEFAULTS.siteUrl,
-  sitemapHost:
-    clean(process.env.NEXT_PUBLIC_SITEMAP_HOST) ?? PRODUCTION_DEFAULTS.sitemapHost,
-  apiBaseUrl:
-    clean(process.env.NEXT_PUBLIC_API_BASE_URL) ??
+  siteUrl: productionPublicUrl(
+    process.env.NEXT_PUBLIC_SITE_URL,
+    PRODUCTION_DEFAULTS.siteUrl,
+  ),
+  sitemapHost: productionPublicUrl(
+    process.env.NEXT_PUBLIC_SITEMAP_HOST,
+    PRODUCTION_DEFAULTS.sitemapHost,
+  ),
+  apiBaseUrl: productionPublicUrl(
+    process.env.NEXT_PUBLIC_API_BASE_URL,
     PRODUCTION_DEFAULTS.apiBaseUrl,
+  ),
   apiTimeoutMs: Number(process.env.NEXT_PUBLIC_API_TIMEOUT ?? 30000),
-  customerAppUrl: productionAppUrl(
+  customerAppUrl: productionPublicUrl(
     process.env.NEXT_PUBLIC_CUSTOMER_APP_URL,
     PRODUCTION_DEFAULTS.customerAppUrl,
   ),
-  sellerAppUrl: productionAppUrl(
+  sellerAppUrl: productionPublicUrl(
     process.env.NEXT_PUBLIC_SELLER_APP_URL,
     PRODUCTION_DEFAULTS.sellerAppUrl,
   ),
-  adminAppUrl: productionAppUrl(
+  adminAppUrl: productionPublicUrl(
     process.env.NEXT_PUBLIC_ADMIN_APP_URL,
     PRODUCTION_DEFAULTS.adminAppUrl,
   ),
@@ -89,7 +97,6 @@ export const platformLinks = {
   sellerRegister: `${env.sellerAppUrl}/register`,
   customerImportBuy: `${env.customerAppUrl}/import/buy/new`,
   sellerImportSell: `${env.sellerAppUrl}/import/sell/new`,
-  /** Post-login dashboards once auth completes on each panel. */
   customerDashboard: `${env.customerAppUrl}/dashboard`,
   sellerDashboard: `${env.sellerAppUrl}/dashboard`,
   playStore: env.playStoreUrl,
@@ -97,7 +104,7 @@ export const platformLinks = {
 } as const;
 
 export const PROPOSED_APP_HOSTS = {
-  website: "https://polystorex.com",
+  website: PRODUCTION_DEFAULTS.siteUrl,
   customer: PRODUCTION_DEFAULTS.customerAppUrl,
   seller: PRODUCTION_DEFAULTS.sellerAppUrl,
   admin: PRODUCTION_DEFAULTS.adminAppUrl,

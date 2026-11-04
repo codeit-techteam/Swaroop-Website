@@ -11,8 +11,12 @@ type PageMeta = {
   noIndex?: boolean;
 };
 
+/** Canonical public URLs — never localhost even if env was mis-set at build time. */
 export function absoluteUrl(path = "/"): string {
-  return `${env.siteUrl}${path.startsWith("/") ? path : `/${path}`}`;
+  const base = env.siteUrl.includes("localhost")
+    ? "https://www.polystorex.com"
+    : env.siteUrl;
+  return `${base}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
 export function pageMetadata({ title, description, path, image, noIndex }: PageMeta): Metadata {

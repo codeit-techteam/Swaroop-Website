@@ -4,10 +4,10 @@ import { SITE } from "@/content/site";
 
 type LogoProps = {
   className?: string;
+  /** `dark` = dark text on light surfaces; `light` = light lockup on dark surfaces. */
   tone?: "dark" | "light";
   showWordmark?: boolean;
   wordmarkClassName?: string;
-  /** Prefer full final artwork (orbit + PolyStoreX + gold underline + X). */
   variant?: "full" | "mark";
 };
 
@@ -31,9 +31,11 @@ export function LogoMark({
 }
 
 /**
- * Production logo lockup from the client artwork.
- * Transparent PNG so the black plate never shows on light headers.
- * On dark footers, a subtle inset keeps the orbit/gold readable.
+ * Production navbar/footer logo.
+ *
+ * Light surfaces: orbit mark + navy/gold CSS wordmark (the client PNG uses a white
+ * wordmark, which disappears on white headers when the black plate is removed).
+ * Dark surfaces: full transparent lockup (white wordmark readable on navy).
  */
 export function Logo({
   className,
@@ -42,34 +44,33 @@ export function Logo({
   wordmarkClassName,
   variant = "full",
 }: LogoProps) {
-  if (variant === "mark" || !showWordmark) {
+  const onDarkSurface = tone === "light";
+
+  if (variant === "mark" || !showWordmark || !onDarkSurface) {
     return (
       <span className={cn("inline-flex items-center gap-2.5", className)}>
         <LogoMark />
         {showWordmark ? (
           <span
             className={cn(
-              "font-display text-[1.15rem] font-semibold tracking-[0.06em]",
-              tone === "dark" ? "text-brand" : "text-white",
+              "font-display text-[1.2rem] font-semibold tracking-[0.04em]",
+              onDarkSurface ? "text-white" : "text-brand",
               wordmarkClassName,
             )}
           >
-            {SITE.name}
+            PolyStore
+            <span className={onDarkSurface ? "text-accent" : "text-accent-600"}>X</span>
           </span>
         ) : null}
       </span>
     );
   }
 
-  const onDark = tone === "light";
-
+  // Dark footer / transparent header over hero imagery
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded-xl transition-shadow duration-300",
-        onDark
-          ? "bg-black/25 px-2.5 py-1.5 ring-1 ring-white/10 backdrop-blur-[2px]"
-          : "px-0.5 py-0.5",
+        "inline-flex items-center rounded-xl bg-black/30 px-2.5 py-1.5 ring-1 ring-white/15",
         className,
       )}
     >
@@ -78,12 +79,7 @@ export function Logo({
         alt={SITE.name}
         width={220}
         height={110}
-        className={cn(
-          "w-auto object-contain object-left",
-          onDark
-            ? "h-9 max-w-[168px] sm:h-10 sm:max-w-[196px]"
-            : "h-10 max-w-[188px] sm:h-11 sm:max-w-[220px]",
-        )}
+        className="h-9 w-auto max-w-[180px] object-contain object-left sm:h-10 sm:max-w-[210px]"
         priority
       />
     </span>

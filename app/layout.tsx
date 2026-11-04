@@ -18,7 +18,10 @@ const display = Inter_Tight({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(env.siteUrl),
+  // Never allow localhost metadataBase even if env was wrong at build time.
+  metadataBase: new URL(
+    env.siteUrl.includes("localhost") ? "https://www.polystorex.com" : env.siteUrl,
+  ),
   title: { default: SITE.title, template: `%s | ${SITE.name}` },
   description: SITE.description,
   applicationName: SITE.name,
@@ -37,9 +40,11 @@ export const metadata: Metadata = {
   formatDetection: { telephone: false, email: false, address: false },
   icons: {
     icon: [
-      { url: "/favicon.ico" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", sizes: "32x32", type: "image/png" },
       { url: "/icon.png", sizes: "192x192", type: "image/png" },
     ],
+    shortcut: ["/favicon.ico"],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
 };
