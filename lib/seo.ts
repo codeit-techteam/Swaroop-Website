@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { COMPANY } from "@/content/company";
 import { env } from "@/lib/env";
 import { SITE } from "@/content/site";
 
@@ -43,26 +44,34 @@ export function pageMetadata({ title, description, path, image, noIndex }: PageM
 
 export function organizationJsonLd() {
   const sameAs = Object.values(env.social).filter((url): url is string => Boolean(url));
+  const email = env.contactEmail ?? COMPANY.email;
+  const telephone = env.contactPhone ?? COMPANY.phoneTel;
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: SITE.legalName,
+    name: COMPANY.legalName,
     alternateName: SITE.name,
+    brand: SITE.name,
     url: env.siteUrl,
-    logo: absoluteUrl("/icon.svg"),
+    logo: absoluteUrl("/brand/polystorex-logo.png"),
     description: SITE.description,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: `${COMPANY.address.buildingNo}, ${COMPANY.address.premises}, ${COMPANY.address.street}, ${COMPANY.address.locality}`,
+      addressLocality: COMPANY.address.city,
+      addressRegion: COMPANY.address.state,
+      postalCode: COMPANY.address.pinCode,
+      addressCountry: "IN",
+    },
     ...(sameAs.length ? { sameAs } : {}),
-    ...(env.contactEmail || env.contactPhone
-      ? {
-          contactPoint: {
-            "@type": "ContactPoint",
-            contactType: "customer support",
-            areaServed: "IN",
-            ...(env.contactEmail ? { email: env.contactEmail } : {}),
-            ...(env.contactPhone ? { telephone: env.contactPhone } : {}),
-          },
-        }
-      : {}),
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      areaServed: "IN",
+      email,
+      telephone,
+      availableLanguage: ["en", "hi"],
+    },
   };
 }
 

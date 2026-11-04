@@ -7,18 +7,18 @@ import showcase from "@/public/images/mobile-app-showcase.webp";
 const FEATURES = [
   {
     icon: IndianRupee,
-    title: "Real-time prices",
-    detail: "Live rates updating every 2 minutes — no calls, no waiting.",
+    title: "Seller offer prices",
+    detail: "Authenticated market listings with material, freight and landed estimates.",
   },
   {
     icon: MapPin,
-    title: "Location-based rates",
-    detail: "Prices specific to your city, your zone, your supplier network.",
+    title: "Location-aware quotes",
+    detail: "Delivery location feeds freight and landed cost estimates.",
   },
   {
     icon: Bell,
-    title: "Live alerts",
-    detail: "Get notified when prices cross thresholds you care about.",
+    title: "Order alerts",
+    detail: "Updates when purchase requests, payments and shipments change status.",
   },
   {
     icon: Zap,
@@ -57,8 +57,9 @@ export function MobileApp() {
               </span>
             </h2>
             <p className="mt-5 max-w-lg text-lg leading-relaxed text-ink-muted">
-              Your complete petrochemical trading platform in one app. Real-time prices, verified
-              suppliers, import trading and more.
+              Your complete petrochemical trading platform in one app. Authenticated seller offers,
+              verified grades, import trading and more. Store listings will appear here after Play
+              Store and App Store publication.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <TrackedLink

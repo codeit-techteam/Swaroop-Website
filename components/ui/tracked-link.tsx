@@ -54,7 +54,11 @@ export function TrackedLink({
     </>
   );
 
-  if (external) {
+  // Treat absolute http(s) URLs as external; relative paths use Next Link
+  // so CTAs can safely fall back to on-site /apps/* routes.
+  const isExternal = external || /^https?:\/\//i.test(href);
+
+  if (isExternal) {
     return (
       <a href={href} rel="noopener" className={classes} onClick={handleClick} {...rest}>
         {content}

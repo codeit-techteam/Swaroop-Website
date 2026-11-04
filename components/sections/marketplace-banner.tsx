@@ -5,9 +5,21 @@ import { platformLinks } from "@/lib/env";
 import dashboard from "@/public/images/marketplace-dashboard.webp";
 
 const HIGHLIGHTS = [
-  { icon: IndianRupee, title: "Real-time prices", detail: "Live rates updating every 2 minutes." },
-  { icon: MapPin, title: "Location-based rates", detail: "Prices specific to your city, zone and suppliers." },
-  { icon: Bell, title: "Live alerts", detail: "Get notified when prices cross your thresholds." },
+  {
+    icon: IndianRupee,
+    title: "Market offer prices",
+    detail: "Seller offer rates shown after sign-in — not public commodity tickers.",
+  },
+  {
+    icon: MapPin,
+    title: "Delivery-aware quotes",
+    detail: "Freight and landed estimates based on your delivery location.",
+  },
+  {
+    icon: Bell,
+    title: "Order updates",
+    detail: "Stay informed as purchase requests and shipments progress.",
+  },
   { icon: Zap, title: "Quick decisions", detail: "From checking to deciding in seconds." },
 ] as const;
 
@@ -43,8 +55,8 @@ export function MarketplaceBanner() {
               </span>
             </h2>
             <p className="mt-5 max-w-lg text-lg leading-relaxed text-ink-muted">
-              Discover verified grades, compare market prices and procure directly through a secure
-              blind marketplace.
+              Discover verified grades, compare authenticated seller offers and procure through a
+              secure blind marketplace.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <TrackedLink
@@ -108,7 +120,7 @@ export function MarketplaceBanner() {
           >
             <Image
               src={dashboard}
-              alt="PolyStoreX customer web portal dashboard showing the blind marketplace, live market prices per grade, available credit and import trading."
+              alt="PolyStoreX customer web portal dashboard showing the blind marketplace, seller offer prices per grade, available credit and import trading."
               sizes="(min-width: 1024px) 900px, 100vw"
               className="relative h-auto w-full select-none transition-transform duration-700 ease-out group-hover:-translate-y-1 group-hover:scale-[1.01] [mask-image:linear-gradient(to_bottom,transparent,#000_5%,#000_93%,transparent),linear-gradient(to_right,transparent,#000_5%,#000_97%,transparent)] [mask-composite:intersect] [-webkit-mask-image:linear-gradient(to_bottom,transparent,#000_5%,#000_93%,transparent),linear-gradient(to_right,transparent,#000_5%,#000_97%,transparent)] [-webkit-mask-composite:source-in]"
             />

@@ -1,6 +1,9 @@
+import { COMPANY } from "@/content/company";
+
 export const SITE = {
   name: "PolyStoreX",
-  legalName: "POLYSTOREX",
+  legalName: COMPANY.legalName,
+  brandName: COMPANY.brandName,
   title: "PolyStoreX | Industrial Materials & B2B Procurement Platform",
   description:
     "PolyStoreX is a technology-driven B2B platform to source, trade and deliver polymers, petrochemicals and industrial materials across India - with verified supply, structured procurement and business credit.",
@@ -29,7 +32,6 @@ export const FOOTER_COLUMNS: {
     links: [
       { href: "/about", label: "About PolyStoreX" },
       { href: "/contact", label: "Contact Us" },
-      { href: "/about#careers", label: "Careers" },
     ],
   },
   {
@@ -62,8 +64,8 @@ export const FOOTER_COLUMNS: {
     title: "Legal",
     links: [
       { href: "/privacy", label: "Privacy Policy" },
-      { href: "/terms", label: "Terms" },
-      { href: "/terms#legal", label: "Legal" },
+      { href: "/terms", label: "Terms of Use" },
+      { href: "/terms#legal", label: "Legal notices" },
     ],
   },
 ];

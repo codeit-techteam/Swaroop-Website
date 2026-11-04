@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalPage, type LegalSection } from "@/components/sections/legal-page";
+import {
+  COMPANY,
+  COMPANY_MAILTO,
+  COMPANY_TEL,
+  formatRegisteredAddressInline,
+} from "@/content/company";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -94,8 +100,42 @@ const SECTIONS: LegalSection[] = [
     body: (
       <p>
         You can request access to, correction of, or deletion of your personal information, subject to
-        legal record-keeping requirements. To make a request, <Link href="/contact?topic=OTHER" className="font-semibold text-accent-600">contact us</Link>.
+        legal record-keeping requirements. To make a request,{" "}
+        <Link href="/contact?topic=OTHER" className="font-semibold text-accent-600">
+          contact us
+        </Link>{" "}
+        or email{" "}
+        <a href={COMPANY_MAILTO} className="font-semibold text-accent-600">
+          {COMPANY.email}
+        </a>
+        .
       </p>
+    ),
+  },
+  {
+    id: "controller",
+    title: "Data controller",
+    body: (
+      <>
+        <p>
+          Personal information collected through this website is controlled by{" "}
+          <strong>{COMPANY.legalName}</strong>, {formatRegisteredAddressInline()}.
+        </p>
+        <ul>
+          <li>
+            Email:{" "}
+            <a href={COMPANY_MAILTO} className="font-semibold text-accent-600">
+              {COMPANY.email}
+            </a>
+          </li>
+          <li>
+            Phone:{" "}
+            <a href={COMPANY_TEL} className="font-semibold text-accent-600">
+              {COMPANY.phoneDisplay}
+            </a>
+          </li>
+        </ul>
+      </>
     ),
   },
   {

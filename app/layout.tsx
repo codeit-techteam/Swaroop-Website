@@ -36,7 +36,11 @@ export const metadata: Metadata = {
   ],
   formatDetection: { telephone: false, email: false, address: false },
   icons: {
-    icon: [{ url: "/icon.svg" }, { url: "/icon.png" }],
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/icon.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
   },
 };
 

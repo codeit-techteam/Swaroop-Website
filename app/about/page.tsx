@@ -4,14 +4,13 @@ import { Eye, Handshake, Scale, ShieldCheck, Smartphone, Store, Factory, LayoutD
 import { Benefits } from "@/components/sections/benefits";
 import { FinalCta } from "@/components/sections/final-cta";
 import { PageHero } from "@/components/sections/page-hero";
-import { ButtonLink } from "@/components/ui/button";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { pageMetadata } from "@/lib/seo";
 import manufacturingImage from "@/public/images/industry-manufacturing.webp";
 import refineryImage from "@/public/images/hero-refinery-granules.webp";
 
 export const metadata: Metadata = pageMetadata({
-  title: "About PolyStoreX",
+  title: "About",
   description:
     "PolyStoreX is building India's connected platform for industrial materials - bringing verified supply, structured procurement, logistics and business credit together for buyers and sellers.",
   path: "/about",
@@ -35,7 +34,7 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About PolyStoreX"
+        eyebrow="About"
         breadcrumb={{ name: "About", path: "/about" }}
         image={refineryImage}
         imageAlt="Petrochemical plant behind a pile of polymer granules"
@@ -111,27 +110,6 @@ export default function AboutPage() {
       </section>
 
       <Benefits />
-
-      <section id="careers" aria-labelledby="careers-heading" className="section scroll-mt-24 bg-paper">
-        <div className="container">
-          <div data-reveal className="flex flex-col items-start justify-between gap-8 rounded-3xl border border-line bg-white p-8 sm:p-12 lg:flex-row lg:items-center">
-            <div className="max-w-2xl">
-              <p className="eyebrow">Careers</p>
-              <h2 id="careers-heading" className="mt-4 text-display-md font-semibold">
-                Help build the future of industrial trade.
-              </h2>
-              <p className="mt-4 text-lg leading-relaxed text-ink-muted">
-                We're always keen to hear from people who know industrial materials, procurement,
-                logistics, credit or technology. Introduce yourself and tell us where you'd make an
-                impact.
-              </p>
-            </div>
-            <ButtonLink href="/contact?topic=OTHER" size="lg" arrow>
-              Get in touch
-            </ButtonLink>
-          </div>
-        </div>
-      </section>
 
       <FinalCta />
     </>

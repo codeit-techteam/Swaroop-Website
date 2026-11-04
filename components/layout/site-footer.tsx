@@ -1,7 +1,13 @@
 import Link from "next/link";
-import { ArrowRight, Mail, Phone } from "lucide-react";
+import { ArrowRight, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { buttonClasses } from "@/components/ui/button";
+import {
+  COMPANY,
+  COMPANY_MAILTO,
+  COMPANY_TEL,
+  formatRegisteredAddress,
+} from "@/content/company";
 import { FOOTER_COLUMNS, SITE } from "@/content/site";
 import { env, platformLinks } from "@/lib/env";
 
@@ -24,6 +30,8 @@ export function SiteFooter() {
   const socials = (Object.keys(env.social) as (keyof typeof env.social)[])
     .map((key) => ({ key, url: env.social[key], ...SOCIAL_ICONS[key] }))
     .filter((item): item is typeof item & { url: string } => Boolean(item.url));
+
+  const addressLines = formatRegisteredAddress("\n").split("\n");
 
   return (
     <footer className="relative overflow-hidden bg-brand-900 text-brand-100">
@@ -53,24 +61,28 @@ export function SiteFooter() {
                 Partner with us
               </Link>
             </div>
-            {env.contactEmail || env.contactPhone ? (
-              <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-                {env.contactEmail ? (
-                  <li>
-                    <a href={`mailto:${env.contactEmail}`} className="inline-flex items-center gap-2 hover:text-white">
-                      <Mail aria-hidden="true" className="h-4 w-4" /> {env.contactEmail}
-                    </a>
-                  </li>
-                ) : null}
-                {env.contactPhone ? (
-                  <li>
-                    <a href={`tel:${env.contactPhone.replace(/\s/g, "")}`} className="inline-flex items-center gap-2 hover:text-white">
-                      <Phone aria-hidden="true" className="h-4 w-4" /> {env.contactPhone}
-                    </a>
-                  </li>
-                ) : null}
-              </ul>
-            ) : null}
+            <ul className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+              <li>
+                <a href={COMPANY_MAILTO} className="inline-flex items-center gap-2 hover:text-white">
+                  <Mail aria-hidden="true" className="h-4 w-4" /> {COMPANY.email}
+                </a>
+              </li>
+              <li>
+                <a href={COMPANY_TEL} className="inline-flex items-center gap-2 hover:text-white">
+                  <Phone aria-hidden="true" className="h-4 w-4" /> {COMPANY.phoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={COMPANY.whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 hover:text-white"
+                >
+                  <MessageCircle aria-hidden="true" className="h-4 w-4" /> WhatsApp
+                </a>
+              </li>
+            </ul>
             {socials.length ? (
               <ul className="flex gap-2" aria-label="PolyStoreX on social media">
                 {socials.map((social) => (
@@ -101,6 +113,19 @@ export function SiteFooter() {
             <p className="mt-6 text-[0.95rem] leading-relaxed text-brand-100/70">
               {SITE.description}
             </p>
+            <div className="mt-6 space-y-3 text-sm text-brand-100/70">
+              <p className="font-semibold text-white">{COMPANY.legalName}</p>
+              <p className="flex gap-2">
+                <MapPin aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-accent-300" />
+                <span>
+                  {addressLines.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </span>
+              </p>
+            </div>
           </div>
 
           <nav aria-label="Footer" className="grid grid-cols-2 gap-x-6 gap-y-10 sm:grid-cols-3 lg:grid-cols-5">
@@ -114,8 +139,12 @@ export function SiteFooter() {
                     <li key={link.label}>
                       {link.external ? (
                         <a
-                          href={link.external === "customer" ? platformLinks.customerLogin : platformLinks.sellerLogin}
-                          rel="noopener"
+                          href={
+                            link.external === "customer"
+                              ? platformLinks.customerLogin
+                              : platformLinks.sellerLogin
+                          }
+                          rel="noopener noreferrer"
                           className="text-brand-100/70 transition-colors hover:text-white"
                         >
                           {link.label}
@@ -133,7 +162,9 @@ export function SiteFooter() {
           </nav>
         </div>
         <div className="flex flex-col gap-3 py-8 text-sm text-brand-100/55 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} {SITE.legalName}. All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} {COMPANY.legalName}. All rights reserved. Brand: {SITE.brandName}.
+          </p>
           <p>Industrial materials, procurement and business credit - built for India.</p>
         </div>
       </div>

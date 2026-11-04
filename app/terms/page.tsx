@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LegalPage, type LegalSection } from "@/components/sections/legal-page";
+import {
+  COMPANY,
+  COMPANY_MAILTO,
+  COMPANY_TEL,
+  formatRegisteredAddressInline,
+} from "@/content/company";
 import { pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
@@ -77,13 +83,44 @@ const SECTIONS: LegalSection[] = [
     id: "legal",
     title: "Legal",
     body: (
-      <p>
-        These terms are governed by the laws of India. For legal notices or questions about these terms,{" "}
-        <Link href="/contact?topic=OTHER" className="font-semibold text-accent-600">
-          contact us
-        </Link>
-        .
-      </p>
+      <>
+        <p>
+          These terms are governed by the laws of India. The PolyStoreX platform is operated by{" "}
+          <strong>{COMPANY.legalName}</strong>, registered at {formatRegisteredAddressInline()}.
+        </p>
+        <ul>
+          <li>
+            Email:{" "}
+            <a href={COMPANY_MAILTO} className="font-semibold text-accent-600">
+              {COMPANY.email}
+            </a>
+          </li>
+          <li>
+            Phone:{" "}
+            <a href={COMPANY_TEL} className="font-semibold text-accent-600">
+              {COMPANY.phoneDisplay}
+            </a>
+          </li>
+          <li>
+            WhatsApp:{" "}
+            <a
+              href={COMPANY.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-semibold text-accent-600"
+            >
+              {COMPANY.whatsappDisplay}
+            </a>
+          </li>
+        </ul>
+        <p>
+          For legal notices or questions about these terms,{" "}
+          <Link href="/contact?topic=OTHER" className="font-semibold text-accent-600">
+            contact us
+          </Link>
+          .
+        </p>
+      </>
     ),
   },
 ];
