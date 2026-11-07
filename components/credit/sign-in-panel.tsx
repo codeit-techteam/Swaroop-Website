@@ -26,8 +26,8 @@ const RESEND_SECONDS = 60;
 export function SignInPanel({
   expired,
   onSignedIn,
-  title = "Verify your mobile number",
-  description = "Enter your Indian mobile number. We'll send a 6-digit OTP. If you already applied for credit, we'll show your Application ID so you can track status. Otherwise you'll continue to the application form.",
+  title = "Sign in to apply for credit",
+  description = "Verify your Indian mobile number with a one-time code from PolyStoreX. New buyers are onboarded through the same secure OTP flow — no email or password login.",
 }: {
   expired: boolean;
   onSignedIn: (user: AuthUser) => void;

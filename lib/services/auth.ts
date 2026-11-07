@@ -17,10 +17,10 @@ type SessionPayload = {
   user: AuthUser;
 };
 
-export type OtpIdentifier = { phone: string } | { email: string };
+export type OtpIdentifier = { phone: string };
 
 /** Indian mobile only — 10 digits starting 6–9, optional +91 / 0 prefix. */
-export function toPhone(raw: string): { phone: string } | null {
+export function toPhone(raw: string): OtpIdentifier | null {
   const digits = raw.replace(/[^\d]/g, "");
   const local =
     digits.length === 12 && digits.startsWith("91")
@@ -32,45 +32,51 @@ export function toPhone(raw: string): { phone: string } | null {
   return null;
 }
 
-export function toIdentifier(raw: string): OtpIdentifier | null {
-  const value = raw.trim();
-  if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-    return { email: value.toLowerCase() };
-  }
-  return toPhone(value);
-}
-
 export function maskPhone(phone: string): string {
   const digits = phone.replace(/\D/g, "").slice(-10);
   if (digits.length !== 10) return "+91 ******XXXX";
   return `+91 ******${digits.slice(-4)}`;
 }
 
-/** Sends a one-time code. New mobile numbers / emails are registered on verify. */
+type OtpSendPayload = {
+  message: string;
+  devOtp?: string;
+  resendCooldownSeconds?: number;
+  expiresInSeconds?: number;
+  smsDispatched?: boolean;
+  correlationId?: string;
+};
+
+function assertSmsDispatched(data: OtpSendPayload): OtpSendPayload {
+  if (
+    data.smsDispatched === false &&
+    process.env.NODE_ENV === "production"
+  ) {
+    throw new Error(
+      "SMS could not be dispatched. Please try again in a moment.",
+    );
+  }
+  return data;
+}
+
+/** Sends a one-time code. New mobile numbers are registered on verify. */
 export async function sendOtp(identifier: OtpIdentifier) {
-  return apiRequest<{
-    message: string;
-    devOtp?: string;
-    resendCooldownSeconds?: number;
-    expiresInSeconds?: number;
-  }>("/auth/otp/send", {
+  const data = await apiRequest<OtpSendPayload>("/auth/otp/send", {
     method: "POST",
     auth: false,
     body: { ...identifier, purpose: "LOGIN" },
   });
+  return assertSmsDispatched(data);
 }
 
 /** Fresh OTP — invalidates the previous challenge server-side. */
 export async function resendOtp(identifier: OtpIdentifier) {
-  return apiRequest<{
-    message: string;
-    resendCooldownSeconds?: number;
-    expiresInSeconds?: number;
-  }>("/auth/otp/resend", {
+  const data = await apiRequest<OtpSendPayload>("/auth/otp/resend", {
     method: "POST",
     auth: false,
     body: { ...identifier, purpose: "LOGIN" },
   });
+  return assertSmsDispatched(data);
 }
 
 export async function verifyOtp(identifier: OtpIdentifier, otp: string) {
@@ -78,19 +84,6 @@ export async function verifyOtp(identifier: OtpIdentifier, otp: string) {
     method: "POST",
     auth: false,
     body: { ...identifier, otp, purpose: "LOGIN", roleHint: "CUSTOMER" },
-  });
-  writeSession({
-    accessToken: session.accessToken,
-    refreshToken: session.refreshToken ?? null,
-  });
-  return session.user;
-}
-
-export async function loginWithPassword(identifier: OtpIdentifier, password: string) {
-  const session = await apiRequest<SessionPayload>("/auth/login", {
-    method: "POST",
-    auth: false,
-    body: { ...identifier, password },
   });
   writeSession({
     accessToken: session.accessToken,
