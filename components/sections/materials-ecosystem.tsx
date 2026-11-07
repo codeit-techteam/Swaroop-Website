@@ -99,7 +99,7 @@ export function MaterialsEcosystem() {
             >
               <Link
                 href={`/materials#${group.slug}`}
-                className="card group flex h-full flex-col p-7 transition-all duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-lift"
+                className="card-surface group p-7"
               >
                 <div className="flex items-start justify-between">
                   <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand transition-colors group-hover:bg-brand group-hover:text-white">

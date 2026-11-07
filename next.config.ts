@@ -28,6 +28,19 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     deviceSizes: [360, 480, 640, 768, 1024, 1280, 1536, 1920],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cdn.sanity.io",
+        pathname: "/images/**",
+      },
+    ],
+  },
+  async redirects() {
+    return [
+      { source: "/insights", destination: "/blogs", permanent: true },
+      { source: "/insights/:path*", destination: "/blogs", permanent: true },
+    ];
   },
   experimental: {
     optimizePackageImports: ["lucide-react"],

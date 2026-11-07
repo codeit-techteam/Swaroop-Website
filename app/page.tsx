@@ -7,7 +7,7 @@ import { FaqSection } from "@/components/sections/faq";
 import { FinalCta } from "@/components/sections/final-cta";
 import { Hero } from "@/components/sections/hero";
 import { Industries } from "@/components/sections/industries";
-import { InsightsPreview } from "@/components/sections/insights-preview";
+import { BlogsPreview } from "@/components/sections/blogs-preview";
 import { LogisticsSection } from "@/components/sections/logistics";
 import { MarketplaceBanner } from "@/components/sections/marketplace-banner";
 import { MaterialsEcosystem } from "@/components/sections/materials-ecosystem";
@@ -45,7 +45,7 @@ export default function HomePage() {
       <LogisticsSection />
       <Benefits />
       <Industries />
-      <InsightsPreview />
+      <BlogsPreview />
       <FaqSection />
       <FinalCta />
     </>

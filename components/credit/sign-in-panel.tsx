@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { errorMessage } from "@/lib/api-client";
 import {
   loginWithPassword,
+  resendOtp,
   sendOtp,
   toIdentifier,
   verifyOtp,
@@ -17,7 +18,14 @@ import { Alert, FormField, describedBy } from "./flow-ui";
 
 type Mode = "otp" | "password";
 
-const RESEND_SECONDS = 30;
+const RESEND_SECONDS = 60;
+
+function maskIdentifier(identifier: OtpIdentifier): string {
+  if ("email" in identifier) return identifier.email;
+  const digits = identifier.phone.replace(/\D/g, "").slice(-10);
+  if (digits.length !== 10) return "+91 ******XXXX";
+  return `+91 ******${digits.slice(-4)}`;
+}
 
 export function SignInPanel({
   expired,
@@ -55,13 +63,13 @@ export function SignInPanel({
     return parsed;
   }
 
-  async function requestCode(target: OtpIdentifier) {
+  async function requestCode(target: OtpIdentifier, opts?: { resend?: boolean }) {
     setBusy(true);
     setError("");
     try {
-      await sendOtp(target);
+      const result = opts?.resend ? await resendOtp(target) : await sendOtp(target);
       setIdentifier(target);
-      setResendIn(RESEND_SECONDS);
+      setResendIn(result.resendCooldownSeconds ?? RESEND_SECONDS);
     } catch (err) {
       setError(errorMessage(err, "We couldn't send the code. Please try again."));
     } finally {
@@ -73,8 +81,8 @@ export function SignInPanel({
     event.preventDefault();
     setError("");
     if (mode === "otp" && identifier) {
-      if (!/^\d{4,8}$/.test(otp.trim())) {
-        setFieldErrors({ otp: "Enter the code we sent you." });
+      if (!/^\d{6}$/.test(otp.trim())) {
+        setFieldErrors({ otp: "Enter the 6-digit code we sent you." });
         return;
       }
       setFieldErrors({});
@@ -120,18 +128,18 @@ export function SignInPanel({
     setFieldErrors({});
   }
 
-  const identifierLabel = identifier && "phone" in identifier ? identifier.phone : identifier?.email;
+  const identifierLabel = identifier ? maskIdentifier(identifier) : undefined;
 
   return (
-    <div className="mx-auto max-w-md">
-      <div className="card p-6 sm:p-9">
+    <div className="mx-auto w-full max-w-xl">
+      <div className="card p-6 sm:p-8 lg:p-9">
         <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white">
           <LockKeyhole aria-hidden="true" className="h-5 w-5" />
         </span>
         <h2 className="mt-6 text-2xl font-semibold">{title}</h2>
         <p className="mt-2 text-[0.95rem] leading-relaxed text-ink-muted">
-          Use your PolyStoreX buyer account. New to PolyStoreX? Signing in with your mobile number creates
-          your buyer account.
+          Verify your Indian mobile number with a one-time code from PolyStoreX. New buyers are
+          onboarded through the same secure OTP flow - no separate MSG91 integration on this site.
         </p>
 
         {expired ? (
@@ -180,9 +188,9 @@ export function SignInPanel({
                   className="input tracking-[0.4em]"
                   inputMode="numeric"
                   autoComplete="one-time-code"
-                  maxLength={8}
+                  maxLength={6}
                   value={otp}
-                  onChange={(event) => setOtp(event.target.value.replace(/\D/g, ""))}
+                  onChange={(event) => setOtp(event.target.value.replace(/\D/g, "").slice(0, 6))}
                   aria-invalid={Boolean(fieldErrors.otp)}
                   aria-describedby={describedBy("signin-otp", fieldErrors.otp)}
                 />
@@ -233,7 +241,7 @@ export function SignInPanel({
                   type="button"
                   disabled={busy}
                   className="font-semibold text-accent-600 hover:text-accent-700"
-                  onClick={() => void requestCode(identifier)}
+                  onClick={() => void requestCode(identifier, { resend: true })}
                 >
                   Resend code
                 </button>

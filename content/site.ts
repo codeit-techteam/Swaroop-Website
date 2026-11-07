@@ -19,7 +19,7 @@ export const PRIMARY_NAV: NavLink[] = [
   { href: "/credit", label: "Credit" },
   { href: "/how-it-works", label: "How It Works" },
   { href: "/about", label: "About" },
-  { href: "/insights", label: "Insights" },
+  { href: "/blogs", label: "Blogs" },
   { href: "/contact", label: "Contact Us" },
 ];
 
@@ -55,7 +55,7 @@ export const FOOTER_COLUMNS: {
   {
     title: "Resources",
     links: [
-      { href: "/insights", label: "Insights" },
+      { href: "/blogs", label: "Blogs" },
       { href: "/#faq", label: "FAQs" },
       { href: "/contact?topic=OTHER", label: "Support" },
     ],

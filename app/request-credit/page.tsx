@@ -34,12 +34,13 @@ export default function RequestCreditPage() {
         description="Five short steps. Every request is reviewed by the PolyStoreX credit team - approval is never automatic."
       />
       <section id="credit-flow" className="section scroll-mt-20 bg-paper">
-        <div className="container grid gap-10 lg:grid-cols-[1fr_320px] lg:gap-12">
+        {/* Form-forward layout: primary column is the application; checklist stays secondary. */}
+        <div className="container grid gap-8 lg:grid-cols-[minmax(0,1.65fr)_minmax(240px,0.85fr)] lg:items-start lg:gap-10">
           <div className="min-w-0">
             <CreditApplicationFlow />
           </div>
-          <aside className="space-y-4 lg:sticky lg:top-28 lg:self-start">
-            <div className="card p-6">
+          <aside className="order-first space-y-4 lg:order-none lg:sticky lg:top-28 lg:self-start">
+            <div className="card p-5 sm:p-6">
               <h2 className="text-lg font-semibold">Keep these ready</h2>
               <ul className="mt-4 space-y-2.5 text-[0.95rem] text-ink-muted">
                 {CHECKLIST.map((item) => (
@@ -49,9 +50,11 @@ export default function RequestCreditPage() {
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-sm text-ink-subtle">GST returns, a cancelled cheque and business registration help speed up review.</p>
+              <p className="mt-4 text-sm text-ink-subtle">
+                GST returns, a cancelled cheque and business registration help speed up review.
+              </p>
             </div>
-            <ul className="card space-y-4 p-6 text-sm text-ink-muted">
+            <ul className="card space-y-3.5 p-5 text-sm text-ink-muted sm:p-6">
               {ASSURANCES.map((item) => (
                 <li key={item.text} className="flex items-start gap-3">
                   <item.icon aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0 text-accent" />

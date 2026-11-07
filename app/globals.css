@@ -64,7 +64,28 @@
   }
 
   .card {
-    @apply rounded-2xl border border-line bg-white shadow-card;
+    @apply rounded-2xl border border-line bg-white shadow-card transition-[box-shadow,transform,border-color] duration-300 ease-out;
+  }
+
+  /* Industrial catalogue / SKU-style cards — darker surface, stronger type contrast */
+  .card-sku {
+    @apply flex h-full flex-col rounded-2xl border border-brand-900/10 bg-brand-950 p-6 text-white shadow-card transition-[box-shadow,transform,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-accent/40 hover:shadow-lift;
+  }
+
+  .card-sku .sku-name {
+    @apply font-display text-2xl font-semibold tracking-tight text-white;
+  }
+
+  .card-sku .sku-family {
+    @apply mt-1 text-sm font-medium text-accent;
+  }
+
+  .card-sku .sku-desc {
+    @apply mt-3 flex-1 text-[0.95rem] leading-relaxed text-brand-100/75;
+  }
+
+  .card-surface {
+    @apply flex h-full flex-col rounded-2xl border border-line bg-mist/80 p-6 shadow-card transition-[box-shadow,transform,border-color] duration-300 ease-out hover:-translate-y-1 hover:border-brand-200 hover:bg-white hover:shadow-lift;
   }
 
   .grid-texture {

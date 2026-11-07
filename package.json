@@ -11,17 +11,24 @@
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit",
     "test": "node --experimental-strip-types --import ./tests/register.mjs --test tests/*.test.ts",
-    "check:bundle-urls": "node scripts/check-bundle-urls.mjs"
+    "check:bundle-urls": "node scripts/check-bundle-urls.mjs",
+    "studio": "sanity dev"
   },
   "engines": {
     "node": ">=20"
   },
   "dependencies": {
+    "@portabletext/react": "^3.2.4",
+    "@sanity/client": "^6.29.1",
+    "@sanity/image-url": "^1.2.0",
     "clsx": "^2.1.1",
     "lucide-react": "^1.28.0",
     "next": "^15.5.22",
+    "next-sanity": "^9.12.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-is": "^19.3.1",
+    "styled-components": "^6.6.0",
     "tailwind-merge": "^3.6.0"
   },
   "devDependencies": {
@@ -34,6 +41,7 @@
     "eslint-config-next": "^15.5.22",
     "eslint-config-prettier": "^10.1.8",
     "postcss": "^8.5.25",
+    "sanity": "^3.99.0",
     "sharp": "^0.34.5",
     "tailwindcss": "^3.4.19",
     "typescript": "^5.9.3"

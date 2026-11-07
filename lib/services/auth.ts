@@ -32,7 +32,25 @@ export function toIdentifier(raw: string): OtpIdentifier | null {
 
 /** Sends a one-time code. New mobile numbers / emails are registered on verify. */
 export async function sendOtp(identifier: OtpIdentifier) {
-  return apiRequest<{ message: string; devOtp?: string }>("/auth/otp/send", {
+  return apiRequest<{
+    message: string;
+    devOtp?: string;
+    resendCooldownSeconds?: number;
+    expiresInSeconds?: number;
+  }>("/auth/otp/send", {
+    method: "POST",
+    auth: false,
+    body: { ...identifier, purpose: "LOGIN" },
+  });
+}
+
+/** Fresh OTP — invalidates the previous challenge server-side. */
+export async function resendOtp(identifier: OtpIdentifier) {
+  return apiRequest<{
+    message: string;
+    resendCooldownSeconds?: number;
+    expiresInSeconds?: number;
+  }>("/auth/otp/resend", {
     method: "POST",
     auth: false,
     body: { ...identifier, purpose: "LOGIN" },

@@ -2,8 +2,8 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { LoaderCircle, RefreshCw } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { LoaderCircle, RefreshCw, Search } from "lucide-react";
 import { Button, ButtonLink } from "@/components/ui/button";
 import { ApiError, errorMessage } from "@/lib/api-client";
 import {
@@ -18,14 +18,42 @@ import {
 } from "@/lib/services/credit";
 import { cn, formatDate, formatDateTime, formatInr } from "@/lib/utils";
 import { DocumentsManager } from "./documents-manager";
-import { Alert, LoadingPanel, StatusBadge, SummaryList } from "./flow-ui";
+import { Alert, FormField, LoadingPanel, StatusBadge, SummaryList, describedBy } from "./flow-ui";
 import { SignInPanel } from "./sign-in-panel";
 import { hasCustomerRole, useWebsiteSession } from "./use-website-session";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const APP_NUMBER = /^CR-\d{6}-\d{6}$/i;
+
+function normalizeApplicationNumber(value: string): string {
+  return value.trim().toUpperCase();
+}
 
 export function TrackApplication() {
+  const params = useSearchParams();
+  const router = useRouter();
+  const initialRef =
+    normalizeApplicationNumber(params.get("ref") ?? params.get("application") ?? "") || "";
+  const [reference, setReference] = useState(initialRef);
+  const [referenceError, setReferenceError] = useState("");
+  const [gatePassed, setGatePassed] = useState(() => Boolean(initialRef && APP_NUMBER.test(initialRef)));
+
   const { state, retry, signedIn } = useWebsiteSession();
+
+  function continueWithReference(event: React.FormEvent) {
+    event.preventDefault();
+    const next = normalizeApplicationNumber(reference);
+    if (!APP_NUMBER.test(next)) {
+      setReferenceError("Enter your Application ID in the format CR-YYYYMM-XXXXXX.");
+      return;
+    }
+    setReferenceError("");
+    setGatePassed(true);
+    const url = new URL(window.location.href);
+    url.searchParams.set("ref", next);
+    router.replace(`${url.pathname}?${url.searchParams.toString()}`);
+  }
+
   if (state.status === "loading") return <LoadingPanel label="Checking your account…" />;
   if (state.status === "error") {
     return (
@@ -34,28 +62,92 @@ export function TrackApplication() {
       </Alert>
     );
   }
+
   if (state.status === "anonymous") {
+    if (!gatePassed) {
+      return (
+        <div className="mx-auto w-full max-w-xl">
+          <div className="card p-6 sm:p-8">
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white">
+              <Search aria-hidden="true" className="h-5 w-5" />
+            </span>
+            <h2 className="mt-6 text-2xl font-semibold">Track your credit application</h2>
+            <p className="mt-2 text-[0.95rem] leading-relaxed text-ink-muted">
+              Enter the Application ID from your confirmation, then verify the registered mobile
+              number with a one-time code. Application details are never shown from the ID alone.
+            </p>
+            <form noValidate onSubmit={continueWithReference} className="mt-6 space-y-5">
+              <FormField id="track-ref" label="Application ID" error={referenceError}>
+                <input
+                  id="track-ref"
+                  className="input font-mono uppercase tracking-wide"
+                  placeholder="CR-202611-000001"
+                  autoComplete="off"
+                  value={reference}
+                  onChange={(event) => setReference(event.target.value)}
+                  aria-invalid={Boolean(referenceError)}
+                  aria-describedby={describedBy("track-ref", referenceError)}
+                />
+              </FormField>
+              <Button type="submit" size="lg" className="w-full">
+                Continue to mobile verification
+              </Button>
+            </form>
+          </div>
+        </div>
+      );
+    }
+
     return (
-      <SignInPanel expired={state.expired} onSignedIn={signedIn} title="Sign in to track your application" />
+      <div className="space-y-4">
+        <p className="text-center text-sm text-ink-muted">
+          Tracking <span className="font-mono font-semibold text-ink">{normalizeApplicationNumber(reference)}</span>
+          {" · "}
+          <button
+            type="button"
+            className="font-semibold text-accent-600 hover:text-accent-700"
+            onClick={() => {
+              setGatePassed(false);
+              setReference("");
+            }}
+          >
+            Change ID
+          </button>
+        </p>
+        <SignInPanel
+          expired={state.expired}
+          onSignedIn={signedIn}
+          title="Verify your registered mobile number"
+        />
+      </div>
     );
   }
+
   if (!hasCustomerRole(state.user)) {
     return (
       <Alert tone="warning" title="No buyer account found">
-        Credit applications belong to PolyStoreX buyer accounts. Sign in with your buyer account to track one.
+        Credit applications belong to PolyStoreX buyer accounts. Sign in with the mobile number used
+        for the application.
       </Alert>
     );
   }
-  return <Tracker key={state.user.id} />;
+
+  return (
+    <Tracker
+      key={state.user.id}
+      preferredNumber={normalizeApplicationNumber(params.get("ref") ?? reference)}
+    />
+  );
 }
 
 type Load =
   | { status: "loading" }
   | { status: "error"; message: string }
   | { status: "empty" }
+  | { status: "forbidden" }
   | { status: "ready"; application: CreditApplication };
 
-function Tracker() {
+function Tracker({ preferredNumber }: { preferredNumber: string }) {
   const params = useSearchParams();
   const requestedId = params.get("id");
   const [load, setLoad] = useState<Load>({ status: "loading" });
@@ -69,29 +161,44 @@ function Tracker() {
   const fetchCurrent = useCallback(async (quiet = false) => {
     if (!quiet) setLoad({ status: "loading" });
     try {
-      const application =
-        requestedId && UUID.test(requestedId) ? await fetchApplication(requestedId) : await fetchLatestApplication();
+      const list = await fetchMyApplications().catch(() => [] as CreditApplicationSummary[]);
+      setMine(list);
+
+      if (requestedId && UUID.test(requestedId)) {
+        const application = await fetchApplication(requestedId);
+        setLoad({ status: "ready", application });
+        return;
+      }
+
+      if (preferredNumber && APP_NUMBER.test(preferredNumber)) {
+        const match = list.find(
+          (item) => item.applicationNumber.toUpperCase() === preferredNumber,
+        );
+        if (!match) {
+          // Do not leak whether the ID exists for another customer.
+          setLoad({ status: "forbidden" });
+          return;
+        }
+        const application = await fetchApplication(match.id);
+        setLoad({ status: "ready", application });
+        return;
+      }
+
+      const application = await fetchLatestApplication();
       setLoad(application ? { status: "ready", application } : { status: "empty" });
     } catch (error) {
       if (error instanceof ApiError && error.isUnauthorized) return;
       if (error instanceof ApiError && (error.status === 404 || error.isForbidden)) {
-        setLoad({ status: "empty" });
+        setLoad(preferredNumber ? { status: "forbidden" } : { status: "empty" });
         return;
       }
       setLoad({ status: "error", message: errorMessage(error, "We couldn't load your application.") });
     }
-  }, [requestedId]);
+  }, [preferredNumber, requestedId]);
 
   useEffect(() => {
     void fetchCurrent();
   }, [fetchCurrent]);
-
-  useEffect(() => {
-    // Secondary list; the selected application above still renders if this fails.
-    fetchMyApplications()
-      .then(setMine)
-      .catch(() => setMine([]));
-  }, []);
 
   if (load.status === "loading") return <LoadingPanel label="Loading your application…" />;
   if (load.status === "error") {
@@ -109,12 +216,26 @@ function Tracker() {
       </Alert>
     );
   }
+  if (load.status === "forbidden") {
+    return (
+      <div className="card p-8 text-center sm:p-12">
+        <h2 className="text-2xl font-semibold">Application not available</h2>
+        <p className="mx-auto mt-3 max-w-md text-ink-muted">
+          We could not match that Application ID to the verified mobile number on this account.
+          Check the ID, or sign in with the number used when you applied.
+        </p>
+        <ButtonLink href="/request-credit/track" size="lg" className="mt-8" variant="secondary">
+          Try again
+        </ButtonLink>
+      </div>
+    );
+  }
   if (load.status === "empty") {
     return (
       <div className="card p-8 text-center sm:p-12">
         <h2 className="text-2xl font-semibold">No credit application found</h2>
         <p className="mx-auto mt-3 max-w-md text-ink-muted">
-          We couldn't find a credit application on this account. You can start one in a few minutes.
+          We couldn&apos;t find a credit application on this account. You can start one in a few minutes.
         </p>
         <ButtonLink href="/request-credit" size="lg" className="mt-8" arrow>
           Request Credit
@@ -152,7 +273,9 @@ function Tracker() {
           <p className="text-sm text-ink-subtle">Application {application.applicationNumber}</p>
           <StatusBadge status={displayStatusOf(application)} />
         </div>
-        <h2 className="mt-4 text-2xl font-semibold sm:text-3xl">{formatInr(Number(application.requestedLimit))} requested</h2>
+        <h2 className="mt-4 text-2xl font-semibold sm:text-3xl">
+          {formatInr(Number(application.requestedLimit))} requested
+        </h2>
         {application.customerMessage ? (
           <Alert tone={needsDocuments ? "warning" : "info"} className="mt-6" title="Message from the credit team">
             {application.customerMessage}
@@ -160,11 +283,21 @@ function Tracker() {
         ) : null}
         {application.status === "DRAFT" ? (
           application.resubmissionRequested ? (
-            <Alert tone="warning" className="mt-6" title="Changes requested" action={<ButtonLink href="/request-credit" size="sm">Update and resubmit</ButtonLink>}>
+            <Alert
+              tone="warning"
+              className="mt-6"
+              title="Changes requested"
+              action={<ButtonLink href="/request-credit" size="sm">Update and resubmit</ButtonLink>}
+            >
               Update your application as requested above, then submit it again.
             </Alert>
           ) : (
-            <Alert tone="info" className="mt-6" title="Not submitted yet" action={<ButtonLink href="/request-credit" size="sm">Continue application</ButtonLink>}>
+            <Alert
+              tone="info"
+              className="mt-6"
+              title="Not submitted yet"
+              action={<ButtonLink href="/request-credit" size="sm">Continue application</ButtonLink>}
+            >
               Finish your documents and submit to send this request to the credit team.
             </Alert>
           )
@@ -172,12 +305,25 @@ function Tracker() {
         <div className="mt-6">
           <SummaryList
             items={[
-              { label: "Submitted", value: application.submittedAt ? formatDateTime(application.submittedAt) : "Not yet submitted" },
-              { label: "Preferred terms", value: application.requestedTenureDays ? `${application.requestedTenureDays} days` : "-" },
+              {
+                label: "Submitted",
+                value: application.submittedAt
+                  ? formatDateTime(application.submittedAt)
+                  : "Not yet submitted",
+              },
+              {
+                label: "Preferred terms",
+                value: application.requestedTenureDays
+                  ? `${application.requestedTenureDays} days`
+                  : "-",
+              },
               ...(application.approvedLimit
                 ? [{ label: "Approved limit", value: formatInr(Number(application.approvedLimit)) }]
                 : []),
-              ...(application.decidedAt ? [{ label: "Decision date", value: formatDateTime(application.decidedAt) }] : []),
+              ...(application.decidedAt
+                ? [{ label: "Decision date", value: formatDateTime(application.decidedAt) }]
+                : []),
+              { label: "Next action", value: application.nextStep || "Awaiting credit team review" },
               { label: "Last updated", value: formatDateTime(application.updatedAt) },
             ]}
           />
@@ -187,7 +333,9 @@ function Tracker() {
       <section aria-labelledby="track-docs" className="card p-6 sm:p-9">
         <h2 id="track-docs" className="text-xl font-semibold">Documents</h2>
         {needsDocuments ? (
-          <p className="mt-2 text-sm text-ink-muted">Replace the flagged documents, then send them back for review.</p>
+          <p className="mt-2 text-sm text-ink-muted">
+            Replace the flagged documents, then send them back for review.
+          </p>
         ) : null}
         <div className="mt-5">
           <DocumentsManager
@@ -213,13 +361,22 @@ function Tracker() {
               />
             </div>
             {resubmitError ? <Alert tone="error">{resubmitError}</Alert> : null}
-            <Button size="lg" onClick={() => void resubmit()} disabled={resubmitting || docsBlocking} aria-busy={resubmitting}>
+            <Button
+              size="lg"
+              onClick={() => void resubmit()}
+              disabled={resubmitting || docsBlocking}
+              aria-busy={resubmitting}
+            >
               {resubmitting ? <LoaderCircle aria-hidden="true" className="h-4 w-4 animate-spin" /> : null}
               Send documents for review
             </Button>
           </div>
         ) : null}
-        {resubmitted ? <Alert tone="success" className="mt-4">Documents sent back to the credit team for review.</Alert> : null}
+        {resubmitted ? (
+          <Alert tone="success" className="mt-4">
+            Documents sent back to the credit team for review.
+          </Alert>
+        ) : null}
       </section>
 
       {timeline.length ? (
@@ -228,7 +385,10 @@ function Tracker() {
           <ol className="relative mt-6 space-y-6 border-l border-line pl-6">
             {timeline.map((event) => (
               <li key={event.id} className="relative">
-                <span aria-hidden="true" className="absolute -left-[1.85rem] top-1.5 h-2.5 w-2.5 rounded-full bg-accent ring-4 ring-white" />
+                <span
+                  aria-hidden="true"
+                  className="absolute -left-[1.85rem] top-1.5 h-2.5 w-2.5 rounded-full bg-accent ring-4 ring-white"
+                />
                 <p className="font-medium text-ink">{event.description}</p>
                 <p className="mt-0.5 text-sm text-ink-subtle">{formatDateTime(event.createdAt)}</p>
               </li>

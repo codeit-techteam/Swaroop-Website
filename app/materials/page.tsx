@@ -51,23 +51,28 @@ export default function MaterialsPage() {
             title={<span id="polymers-heading">Commodity and engineering polymers.</span>}
             description="Sixteen polymer families covering film, moulding, extrusion, fibre and engineering applications."
           />
-          <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="mt-12 grid auto-rows-fr gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {POLYMER_FAMILIES.map((family, index) => (
               <li
                 key={family.code}
                 data-reveal
                 style={{ "--reveal-delay": `${(index % 4) * 60}ms` } as React.CSSProperties}
-                className="card flex flex-col p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
+                className="card-sku"
               >
                 <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="text-2xl font-semibold">{family.name}</h3>
-                  <span className="text-xs font-medium uppercase tracking-wider text-ink-subtle">Polymer</span>
+                  <h3 className="sku-name">{family.name}</h3>
+                  <span className="shrink-0 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-brand-200/80">
+                    Polymer
+                  </span>
                 </div>
-                <p className="mt-1 text-sm font-medium text-accent-600">{family.fullName}</p>
-                <p className="mt-3 text-[0.95rem] text-ink-muted">{family.summary}</p>
-                <ul className="mt-auto flex flex-wrap gap-1.5 pt-5" aria-label={`${family.name} applications`}>
+                <p className="sku-family">{family.fullName}</p>
+                <p className="sku-desc">{family.summary}</p>
+                <ul className="mt-5 flex flex-wrap gap-1.5 border-t border-white/10 pt-5" aria-label={`${family.name} applications`}>
                   {family.applications.map((app) => (
-                    <li key={app} className="rounded-full bg-paper px-2.5 py-1 text-xs font-medium text-brand-700">
+                    <li
+                      key={app}
+                      className="rounded-md bg-white/10 px-2.5 py-1 text-xs font-medium text-brand-50"
+                    >
                       {app}
                     </li>
                   ))}
@@ -84,25 +89,30 @@ export default function MaterialsPage() {
             eyebrow="Beyond polymers"
             title={<span id="families-heading">Chemicals, additives and specialty materials.</span>}
           />
-          <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-12 grid auto-rows-fr gap-4 md:grid-cols-2 lg:grid-cols-3">
             {others.map((group, index) => (
               <li
                 key={group.slug}
                 id={group.slug}
                 data-reveal
                 style={{ "--reveal-delay": `${(index % 3) * 70}ms` } as React.CSSProperties}
-                className="card flex scroll-mt-28 flex-col p-7"
+                className="card-surface scroll-mt-28"
               >
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white">
+                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white shadow-sm">
                   <MaterialIcon icon={group.icon} className="h-[22px] w-[22px]" />
                 </span>
-                <h3 className="mt-6 text-2xl font-semibold">{group.name}</h3>
+                <h3 className="mt-6 font-display text-2xl font-semibold text-brand-800">{group.name}</h3>
                 <p className="mt-1 text-sm font-medium text-accent-600">{group.tagline}</p>
-                <p className="mt-3 leading-relaxed text-ink-muted">{group.description}</p>
-                <p className="mt-6 text-xs font-semibold uppercase tracking-wider text-ink-subtle">Typical applications</p>
+                <p className="mt-3 flex-1 leading-relaxed text-ink-muted">{group.description}</p>
+                <p className="mt-6 text-xs font-semibold uppercase tracking-wider text-ink-subtle">
+                  Typical applications
+                </p>
                 <ul className="mt-2 flex flex-wrap gap-1.5">
                   {group.applications.map((app) => (
-                    <li key={app} className="rounded-full bg-paper px-2.5 py-1 text-xs font-medium text-brand-700">
+                    <li
+                      key={app}
+                      className="rounded-md bg-white px-2.5 py-1 text-xs font-medium text-brand-700 ring-1 ring-line"
+                    >
                       {app}
                     </li>
                   ))}
@@ -110,12 +120,12 @@ export default function MaterialsPage() {
               </li>
             ))}
           </ul>
-          <div data-reveal className="mt-14 flex flex-col items-start justify-between gap-6 rounded-2xl border border-line bg-white p-8 sm:flex-row sm:items-center">
+          <div data-reveal className="mt-14 flex flex-col items-start justify-between gap-6 rounded-2xl border border-line bg-white p-8 shadow-card sm:flex-row sm:items-center">
             <div>
               <h2 className="text-2xl font-semibold">Looking for a specific grade?</h2>
               <p className="mt-2 max-w-2xl text-ink-muted">
-                Live grades, manufacturers and offers are available to verified buyers inside the
-                PolyStoreX customer platform.
+                Live grades and offers are available to explore in the PolyStoreX customer
+                marketplace. Sign in only when you are ready to purchase.
               </p>
             </div>
             <TrackedLink
