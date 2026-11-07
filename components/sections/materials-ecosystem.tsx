@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { MaterialFamilyCard } from "@/components/materials/material-family-card";
 import { MaterialIcon } from "@/components/sections/material-icon";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { TrackedLink } from "@/components/ui/tracked-link";
@@ -90,37 +91,14 @@ export function MaterialsEcosystem() {
           </article>
         ) : null}
 
-        <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-6 grid auto-rows-fr gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {others.map((group, index) => (
             <li
               key={group.slug}
               data-reveal
               style={{ "--reveal-delay": `${(index % 3) * 80}ms` } as React.CSSProperties}
             >
-              <Link
-                href={`/materials#${group.slug}`}
-                className="card-surface group p-7"
-              >
-                <div className="flex items-start justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-50 text-brand transition-colors group-hover:bg-brand group-hover:text-white">
-                    <MaterialIcon icon={group.icon} className="h-[22px] w-[22px]" />
-                  </span>
-                  <ArrowUpRight
-                    aria-hidden="true"
-                    className="h-5 w-5 text-ink-subtle transition-all group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-accent"
-                  />
-                </div>
-                <h3 className="mt-6 text-xl font-semibold">{group.name}</h3>
-                <p className="mt-1 text-sm font-medium text-accent-600">{group.tagline}</p>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-ink-muted">{group.description}</p>
-                <p className="mt-auto pt-6 text-sm text-ink-subtle">
-                  <span className="font-semibold text-brand-800">Applications:</span>{" "}
-                  {group.applications.slice(0, 3).join(", ")}
-                </p>
-                <span className="mt-4 text-sm font-semibold text-brand-800 group-hover:text-accent-600">
-                  Explore {group.name.toLowerCase()}
-                </span>
-              </Link>
+              <MaterialFamilyCard group={group} />
             </li>
           ))}
         </ul>

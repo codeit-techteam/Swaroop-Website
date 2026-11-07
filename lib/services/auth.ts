@@ -19,15 +19,31 @@ type SessionPayload = {
 
 export type OtpIdentifier = { phone: string } | { email: string };
 
+/** Indian mobile only — 10 digits starting 6–9, optional +91 / 0 prefix. */
+export function toPhone(raw: string): { phone: string } | null {
+  const digits = raw.replace(/[^\d]/g, "");
+  const local =
+    digits.length === 12 && digits.startsWith("91")
+      ? digits.slice(2)
+      : digits.length === 11 && digits.startsWith("0")
+        ? digits.slice(1)
+        : digits;
+  if (/^[6-9]\d{9}$/.test(local)) return { phone: `+91${local}` };
+  return null;
+}
+
 export function toIdentifier(raw: string): OtpIdentifier | null {
   const value = raw.trim();
   if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
     return { email: value.toLowerCase() };
   }
-  const digits = value.replace(/[^\d]/g, "");
-  const local = digits.length === 12 && digits.startsWith("91") ? digits.slice(2) : digits;
-  if (/^[6-9]\d{9}$/.test(local)) return { phone: `+91${local}` };
-  return null;
+  return toPhone(value);
+}
+
+export function maskPhone(phone: string): string {
+  const digits = phone.replace(/\D/g, "").slice(-10);
+  if (digits.length !== 10) return "+91 ******XXXX";
+  return `+91 ******${digits.slice(-4)}`;
 }
 
 /** Sends a one-time code. New mobile numbers / emails are registered on verify. */

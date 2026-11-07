@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { MaterialIcon } from "@/components/sections/material-icon";
+import { MaterialFamilyCard } from "@/components/materials/material-family-card";
 import { FinalCta } from "@/components/sections/final-cta";
 import { PageHero } from "@/components/sections/page-hero";
 import { SectionHeading } from "@/components/ui/section-heading";
@@ -89,34 +89,14 @@ export default function MaterialsPage() {
             eyebrow="Beyond polymers"
             title={<span id="families-heading">Chemicals, additives and specialty materials.</span>}
           />
-          <ul className="mt-12 grid auto-rows-fr gap-4 md:grid-cols-2 lg:grid-cols-3">
+          <ul className="mt-12 grid auto-rows-fr gap-5 md:grid-cols-2 lg:grid-cols-3">
             {others.map((group, index) => (
               <li
                 key={group.slug}
-                id={group.slug}
                 data-reveal
                 style={{ "--reveal-delay": `${(index % 3) * 70}ms` } as React.CSSProperties}
-                className="card-surface scroll-mt-28"
               >
-                <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand text-white shadow-sm">
-                  <MaterialIcon icon={group.icon} className="h-[22px] w-[22px]" />
-                </span>
-                <h3 className="mt-6 font-display text-2xl font-semibold text-brand-800">{group.name}</h3>
-                <p className="mt-1 text-sm font-medium text-accent-600">{group.tagline}</p>
-                <p className="mt-3 flex-1 leading-relaxed text-ink-muted">{group.description}</p>
-                <p className="mt-6 text-xs font-semibold uppercase tracking-wider text-ink-subtle">
-                  Typical applications
-                </p>
-                <ul className="mt-2 flex flex-wrap gap-1.5">
-                  {group.applications.map((app) => (
-                    <li
-                      key={app}
-                      className="rounded-md bg-white px-2.5 py-1 text-xs font-medium text-brand-700 ring-1 ring-line"
-                    >
-                      {app}
-                    </li>
-                  ))}
-                </ul>
+                <MaterialFamilyCard group={group} anchored />
               </li>
             ))}
           </ul>

@@ -118,6 +118,7 @@ export function TrackApplication() {
           expired={state.expired}
           onSignedIn={signedIn}
           title="Verify your registered mobile number"
+          description="Enter the Indian mobile number linked to this Application ID. We'll send a 6-digit OTP before showing status details."
         />
       </div>
     );

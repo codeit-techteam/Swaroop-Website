@@ -64,7 +64,16 @@ export function CreditApplicationFlow() {
       </Alert>
     );
   }
-  if (state.status === "anonymous") return <SignInPanel expired={state.expired} onSignedIn={signedIn} />;
+  if (state.status === "anonymous") {
+    return (
+      <SignInPanel
+        expired={state.expired}
+        onSignedIn={signedIn}
+        title="Verify mobile to request credit"
+        description="We'll check your PolyStoreX buyer account after OTP verification. If you already applied, you'll get your Application ID to track status. New or first-time applicants continue to the credit form."
+      />
+    );
+  }
   if (!hasCustomerRole(state.user)) return <NotCustomer user={state.user} />;
   return <CreditWizard key={state.user.id} user={state.user} />;
 }
@@ -205,22 +214,62 @@ function CreditWizard({ user }: { user: AuthUser }) {
 }
 
 function ExistingApplication({ application, approved = false }: { application: CreditApplication; approved?: boolean }) {
+  const [copied, setCopied] = useState(false);
+
+  async function copyApplicationId() {
+    try {
+      await navigator.clipboard.writeText(application.applicationNumber);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* ignore clipboard failures */
+    }
+  }
+
   return (
-    <div className="card p-6 sm:p-9">
+    <div className="card-material relative overflow-hidden p-6 sm:p-9">
+      <span
+        aria-hidden="true"
+        className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-brand via-accent-500 to-accent"
+      />
       <div className="flex flex-wrap items-center justify-between gap-3">
-        <p className="text-sm text-ink-subtle">Application {application.applicationNumber}</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ink-subtle">
+          Credit application found
+        </p>
         <StatusBadge status={displayStatusOf(application)} />
       </div>
-      <h2 className="mt-4 text-2xl font-semibold">
-        {approved ? "Your business credit is active." : "You already have a credit request in progress."}
+      <h2 className="mt-4 font-display text-2xl font-semibold tracking-tight text-brand-800 sm:text-3xl">
+        {approved ? "Your business credit is active." : "You already have a credit request."}
       </h2>
       <p className="mt-3 max-w-xl text-ink-muted">
         {approved
           ? `An approved limit of ${formatInr(Number(application.approvedLimit ?? 0))} is available in your PolyStoreX account. To request a revised limit, contact the credit team.`
           : `Requested ${formatInr(Number(application.requestedLimit))}${
               application.submittedAt ? ` on ${formatDate(application.submittedAt)}` : ""
-            }. You can follow its progress and respond to document requests from the tracking page.`}
+            }. Use your Application ID below to track status or respond to document requests.`}
       </p>
+
+      <div className="mt-8 rounded-2xl border border-brand-100 bg-brand-50/60 p-5">
+        <p className="text-xs font-semibold uppercase tracking-[0.16em] text-brand-700">
+          Application ID
+        </p>
+        <div className="mt-2 flex flex-wrap items-center gap-3">
+          <p className="font-mono text-xl font-semibold tracking-wide text-brand-900 sm:text-2xl">
+            {application.applicationNumber}
+          </p>
+          <button
+            type="button"
+            onClick={() => void copyApplicationId()}
+            className="rounded-full border border-brand-200 bg-white px-3 py-1.5 text-sm font-semibold text-brand-800 hover:border-brand-300 hover:bg-paper"
+          >
+            {copied ? "Copied" : "Copy ID"}
+          </button>
+        </div>
+        <p className="mt-3 text-sm text-ink-muted">
+          Save this ID. You can also track with the same verified mobile number on the tracking page.
+        </p>
+      </div>
+
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">
         {approved ? (
           <>
@@ -232,9 +281,18 @@ function ExistingApplication({ application, approved = false }: { application: C
             </ButtonLink>
           </>
         ) : (
-          <ButtonLink href={`/request-credit/track?id=${encodeURIComponent(application.id)}`} size="lg" arrow>
-            Track Application
-          </ButtonLink>
+          <>
+            <ButtonLink
+              href={`/request-credit/track?ref=${encodeURIComponent(application.applicationNumber)}&id=${encodeURIComponent(application.id)}`}
+              size="lg"
+              arrow
+            >
+              Check status
+            </ButtonLink>
+            <ButtonLink href="/request-credit/track" variant="ghost" size="lg">
+              Track with Application ID
+            </ButtonLink>
+          </>
         )}
       </div>
     </div>
