@@ -57,11 +57,13 @@ export default function MaterialsPage() {
                 key={family.code}
                 data-reveal
                 style={{ "--reveal-delay": `${(index % 4) * 60}ms` } as React.CSSProperties}
-                className="card-sku"
+                className="card-sku group"
               >
                 <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="sku-name">{family.name}</h3>
-                  <span className="shrink-0 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-brand-200/80">
+                  <h3 className="sku-name transition-colors duration-300 group-hover:text-accent">
+                    {family.name}
+                  </h3>
+                  <span className="shrink-0 rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-0.5 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-brand-100/80">
                     Polymer
                   </span>
                 </div>
@@ -71,7 +73,7 @@ export default function MaterialsPage() {
                   {family.applications.map((app) => (
                     <li
                       key={app}
-                      className="rounded-md bg-white/10 px-2.5 py-1 text-xs font-medium text-brand-50"
+                      className="rounded-full bg-white/[0.08] px-2.5 py-1 text-xs font-medium text-brand-50 ring-1 ring-white/10 transition-colors duration-300 group-hover:bg-white/[0.12]"
                     >
                       {app}
                     </li>
