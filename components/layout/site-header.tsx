@@ -91,10 +91,7 @@ export function SiteHeader() {
       </a>
       <div className="container flex h-[var(--header-h)] items-center justify-between gap-3 sm:gap-6">
         <Link href="/" aria-label="PolyStoreX home" className="rounded-lg">
-          <Logo
-            tone={solid ? "dark" : "light"}
-            wordmarkClassName="max-sm:text-[1rem] max-sm:tracking-[0.1em] max-[359px]:hidden"
-          />
+          <Logo tone={solid ? "dark" : "light"} />
         </Link>
 
         <nav aria-label="Primary" className="hidden xl:block">

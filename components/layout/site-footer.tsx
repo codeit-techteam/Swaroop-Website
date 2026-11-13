@@ -108,7 +108,7 @@ export function SiteFooter() {
         <div className="grid gap-12 border-b border-white/10 py-16 lg:grid-cols-[1.2fr_2fr] lg:py-20">
           <div className="max-w-sm">
             <Link href="/" aria-label="PolyStoreX home" className="inline-block rounded-lg">
-              <Logo tone="light" />
+              <Logo tone="light" className="h-14 sm:h-16" />
             </Link>
             <p className="mt-6 text-[0.95rem] leading-relaxed text-brand-100/70">
               {SITE.description}
