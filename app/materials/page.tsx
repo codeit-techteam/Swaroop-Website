@@ -57,28 +57,36 @@ export default function MaterialsPage() {
                 key={family.code}
                 data-reveal
                 style={{ "--reveal-delay": `${(index % 4) * 60}ms` } as React.CSSProperties}
-                className="card-sku group"
               >
-                <div className="flex items-baseline justify-between gap-3">
-                  <h3 className="sku-name transition-colors duration-300 group-hover:text-accent">
-                    {family.name}
-                  </h3>
-                  <span className="shrink-0 rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-0.5 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-brand-100/80">
-                    Polymer
-                  </span>
-                </div>
-                <p className="sku-family">{family.fullName}</p>
-                <p className="sku-desc">{family.summary}</p>
-                <ul className="mt-5 flex flex-wrap gap-1.5 border-t border-white/10 pt-5" aria-label={`${family.name} applications`}>
-                  {family.applications.map((app) => (
-                    <li
-                      key={app}
-                      className="rounded-full bg-white/[0.08] px-2.5 py-1 text-xs font-medium text-brand-50 ring-1 ring-white/10 transition-colors duration-300 group-hover:bg-white/[0.12]"
-                    >
-                      {app}
-                    </li>
-                  ))}
-                </ul>
+                <a
+                  href={`${platformLinks.customerMarketplace}?category=polymers&search=${encodeURIComponent(family.code)}`}
+                  className="card-sku group block h-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+                  aria-label={`Browse ${family.name} grades on PolyStoreX marketplace`}
+                >
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="sku-name transition-colors duration-300 group-hover:text-accent">
+                      {family.name}
+                    </h3>
+                    <span className="shrink-0 rounded-full border border-white/10 bg-white/[0.06] px-2.5 py-0.5 text-[0.62rem] font-semibold uppercase tracking-[0.16em] text-brand-100/80">
+                      Polymer
+                    </span>
+                  </div>
+                  <p className="sku-family">{family.fullName}</p>
+                  <p className="sku-desc">{family.summary}</p>
+                  <ul
+                    className="mt-5 flex flex-wrap gap-1.5 border-t border-white/10 pt-5"
+                    aria-label={`${family.name} applications`}
+                  >
+                    {family.applications.map((app) => (
+                      <li
+                        key={app}
+                        className="rounded-full bg-white/[0.08] px-2.5 py-1 text-xs font-medium text-brand-50 ring-1 ring-white/10 transition-colors duration-300 group-hover:bg-white/[0.12]"
+                      >
+                        {app}
+                      </li>
+                    ))}
+                  </ul>
+                </a>
               </li>
             ))}
           </ul>

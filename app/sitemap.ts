@@ -20,7 +20,6 @@ const STATIC_ROUTES: {
   { path: "/request-credit", priority: 0.8, changeFrequency: "monthly" },
   { path: "/how-it-works", priority: 0.8, changeFrequency: "monthly" },
   { path: "/about", priority: 0.7, changeFrequency: "monthly" },
-  { path: "/blogs", priority: 0.6, changeFrequency: "weekly" },
   { path: "/contact", priority: 0.6, changeFrequency: "yearly" },
   { path: "/privacy", priority: 0.3, changeFrequency: "yearly" },
   { path: "/terms", priority: 0.3, changeFrequency: "yearly" },
@@ -29,14 +28,28 @@ const STATIC_ROUTES: {
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
 
-  const staticEntries: MetadataRoute.Sitemap = STATIC_ROUTES.map((route) => ({
+  const slugs = await getAllPostSlugs();
+  // Only index /blogs when approved posts exist — empty blog must not look active.
+  const routes = [
+    ...STATIC_ROUTES,
+    ...(slugs.length > 0
+      ? ([
+          {
+            path: "/blogs",
+            priority: 0.6,
+            changeFrequency: "weekly" as const,
+          },
+        ] as const)
+      : []),
+  ];
+
+  const staticEntries: MetadataRoute.Sitemap = routes.map((route) => ({
     url: `${SITE}${route.path === "/" ? "" : route.path}`,
     lastModified,
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }));
 
-  const slugs = await getAllPostSlugs();
   const blogEntries: MetadataRoute.Sitemap = slugs.map((entry) => ({
     url: `${SITE}/blogs/${entry.slug}`,
     lastModified: entry.updatedAt

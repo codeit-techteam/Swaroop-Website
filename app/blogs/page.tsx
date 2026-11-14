@@ -14,11 +14,15 @@ import {
 } from "@/sanity/lib/posts";
 import { isSanityConfigured } from "@/sanity/env";
 
+const blogConfigured = isSanityConfigured();
+
 export const metadata: Metadata = pageMetadata({
   title: "Blog - Market Updates & Procurement Guides",
   description:
     "Market updates, material insights, procurement guides and industry news for buyers and sellers of polymers, petrochemicals and industrial materials.",
   path: "/blogs",
+  // Hide empty / unconfigured blog from search until approved content exists.
+  noIndex: !blogConfigured,
 });
 
 type BlogsPageProps = {

@@ -4,8 +4,8 @@ import { cn } from "@/lib/utils";
 type LogoProps = {
   className?: string;
   /**
-   * `light` = official lockup on a dark surface (transparent artwork).
-   * `dark` = official lockup on a light surface (black plate, so the white wordmark stays visible).
+   * `light` = official lockup on a dark surface (white wordmark, transparent).
+   * `dark` = official lockup on a light surface (dark wordmark, transparent — no black plate).
    */
   tone?: "dark" | "light";
   showWordmark?: boolean;
@@ -17,11 +17,10 @@ export function LogoMark({ className }: { className?: string; tone?: "dark" | "l
   return (
     <Image
       src="/brand/polystorex-symbol.png"
-      alt=""
+      alt="PolyStoreX"
       width={216}
       height={169}
       className={cn("h-8 w-auto shrink-0", className)}
-      aria-hidden
       priority
     />
   );
@@ -48,14 +47,14 @@ export function Logo({
 
   const src = onDarkSurface
     ? "/brand/polystorex-logo-transparent.png"
-    : "/brand/polystorex-logo-light-bg.png";
+    : "/brand/polystorex-logo-on-light.png";
 
   return (
     <Image
       src={src}
       alt="PolyStoreX"
-      width={onDarkSurface ? 848 : 928}
-      height={onDarkSurface ? 372 : 436}
+      width={848}
+      height={372}
       priority
       className={cn(
         "w-auto max-w-[46vw] self-start object-contain",
