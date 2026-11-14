@@ -57,7 +57,7 @@ export function organizationJsonLd() {
     alternateName: SITE.name,
     brand: SITE.name,
     url: env.siteUrl,
-    logo: absoluteUrl("/brand/polystorex-logo.png"),
+    logo: absoluteUrl("/brand/polystorex-logo-light-bg.png"),
     description: SITE.description,
     address: {
       "@type": "PostalAddress",

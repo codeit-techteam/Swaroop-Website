@@ -106,8 +106,9 @@ export default function MaterialsPage() {
             <div>
               <h2 className="text-2xl font-semibold">Looking for a specific grade?</h2>
               <p className="mt-2 max-w-2xl text-ink-muted">
-                Live grades and offers are available to explore in the PolyStoreX customer
-                marketplace. Sign in only when you are ready to purchase.
+                Live listing prices and grades are visible in the PolyStoreX marketplace
+                without an account. Sign in to submit purchase requests, download TDS, or
+                apply for credit.
               </p>
             </div>
             <TrackedLink

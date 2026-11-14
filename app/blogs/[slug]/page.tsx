@@ -76,7 +76,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       name: "PolyStoreX",
       logo: {
         "@type": "ImageObject",
-        url: absoluteUrl("/brand/polystorex-logo.png"),
+        url: absoluteUrl("/brand/polystorex-logo-light-bg.png"),
       },
     },
   };

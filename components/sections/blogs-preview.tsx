@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { BlogCard } from "@/components/blog/blog-card";
-import { BlogEmptyState } from "@/components/blog/blog-empty-state";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { getLatestPosts } from "@/sanity/lib/posts";
 
 export async function BlogsPreview() {
   const posts = await getLatestPosts(4);
+  if (posts.length === 0) return null;
 
   return (
     <section aria-labelledby="blogs-heading" className="section bg-white">
@@ -21,23 +21,17 @@ export async function BlogsPreview() {
           </Link>
         </div>
 
-        {posts.length > 0 ? (
-          <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {posts.map((post, index) => (
-              <li
-                key={post._id}
-                data-reveal
-                style={{ "--reveal-delay": `${index * 70}ms` } as React.CSSProperties}
-              >
-                <BlogCard post={post} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <div className="mt-12">
-            <BlogEmptyState compact />
-          </div>
-        )}
+        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {posts.map((post, index) => (
+            <li
+              key={post._id}
+              data-reveal
+              style={{ "--reveal-delay": `${index * 70}ms` } as React.CSSProperties}
+            >
+              <BlogCard post={post} />
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );

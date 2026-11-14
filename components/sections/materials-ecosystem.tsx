@@ -6,6 +6,7 @@ import { MaterialIcon } from "@/components/sections/material-icon";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { TrackedLink } from "@/components/ui/tracked-link";
 import { MATERIAL_GROUPS, POLYMER_FAMILIES } from "@/content/materials";
+import { platformLinks } from "@/lib/env";
 import granulesImage from "@/public/images/polymer-granules.webp";
 
 export function MaterialsEcosystem() {
@@ -70,12 +71,14 @@ export function MaterialsEcosystem() {
               <p className="mt-4 max-w-lg text-brand-100/80">{polymers.description}</p>
               <ul className="mt-7 flex flex-wrap gap-2" aria-label="Polymer families">
                 {POLYMER_FAMILIES.slice(0, 12).map((family) => (
-                  <li
-                    key={family.code}
-                    title={family.fullName}
-                    className="rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-1.5 text-sm font-medium text-white transition-colors duration-300 hover:border-accent/40 hover:bg-white/[0.1]"
-                  >
-                    {family.name}
+                  <li key={family.code}>
+                    <Link
+                      href={`${platformLinks.customerMarketplace}?category=polymers&search=${encodeURIComponent(family.code)}`}
+                      title={family.fullName}
+                      className="block rounded-full border border-white/15 bg-white/[0.06] px-3.5 py-1.5 text-sm font-medium text-white transition-colors duration-300 hover:border-accent/40 hover:bg-white/[0.1]"
+                    >
+                      {family.name}
+                    </Link>
                   </li>
                 ))}
                 <li className="rounded-full px-2 py-1.5 text-sm text-brand-100/70">

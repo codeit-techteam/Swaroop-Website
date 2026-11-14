@@ -8,7 +8,8 @@ const HIGHLIGHTS = [
   {
     icon: IndianRupee,
     title: "Market offer prices",
-    detail: "Seller offer rates shown after sign-in — not public commodity tickers.",
+    detail:
+      "Live seller listing prices in the marketplace — sign in to purchase, request credit, or download documents.",
   },
   {
     icon: MapPin,

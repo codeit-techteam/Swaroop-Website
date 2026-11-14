@@ -12,6 +12,8 @@ export const SITE = {
 
 export type NavLink = { href: string; label: string };
 
+const blogNavEnabled = Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID?.trim());
+
 export const PRIMARY_NAV: NavLink[] = [
   { href: "/materials", label: "Materials" },
   { href: "/buy-sell", label: "Buy & Sell" },
@@ -19,7 +21,7 @@ export const PRIMARY_NAV: NavLink[] = [
   { href: "/credit", label: "Credit" },
   { href: "/how-it-works", label: "How It Works" },
   { href: "/about", label: "About" },
-  { href: "/blogs", label: "Blogs" },
+  ...(blogNavEnabled ? [{ href: "/blogs", label: "Blogs" } as NavLink] : []),
   { href: "/contact", label: "Contact Us" },
 ];
 
@@ -55,7 +57,7 @@ export const FOOTER_COLUMNS: {
   {
     title: "Resources",
     links: [
-      { href: "/blogs", label: "Blogs" },
+      ...(blogNavEnabled ? [{ href: "/blogs", label: "Blogs" } as NavLink] : []),
       { href: "/#faq", label: "FAQs" },
       { href: "/contact?topic=OTHER", label: "Support" },
     ],
