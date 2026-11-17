@@ -14,16 +14,16 @@ import {
 } from "@/sanity/lib/posts";
 import { isSanityConfigured } from "@/sanity/env";
 
-const blogConfigured = isSanityConfigured();
-
-export const metadata: Metadata = pageMetadata({
-  title: "Blog - Market Updates & Procurement Guides",
-  description:
-    "Market updates, material insights, procurement guides and industry news for buyers and sellers of polymers, petrochemicals and industrial materials.",
-  path: "/blogs",
-  // Hide empty / unconfigured blog from search until approved content exists.
-  noIndex: !blogConfigured,
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const listing = await getPostsPage({ page: 1, category: null });
+  return pageMetadata({
+    title: "Blog - Market Updates & Procurement Guides",
+    description:
+      "Market updates, material insights, procurement guides and industry news for buyers and sellers of polymers, petrochemicals and industrial materials.",
+    path: "/blogs",
+    noIndex: listing.total === 0,
+  });
+}
 
 type BlogsPageProps = {
   searchParams: Promise<{ category?: string; page?: string }>;

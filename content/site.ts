@@ -12,7 +12,9 @@ export const SITE = {
 
 export type NavLink = { href: string; label: string };
 
-const blogNavEnabled = Boolean(process.env.NEXT_PUBLIC_SANITY_PROJECT_ID?.trim());
+// Show the blog in navigation only after real posts are approved.
+// A configured Sanity project with zero posts must not advertise an empty blog.
+const blogNavEnabled = process.env.NEXT_PUBLIC_BLOG_PUBLISHED === "true";
 
 export const PRIMARY_NAV: NavLink[] = [
   { href: "/materials", label: "Materials" },
