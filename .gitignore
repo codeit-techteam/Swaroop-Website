@@ -52,3 +52,21 @@ tmp/
 artifacts/
 coverage/
 *.log
+
+# ---------------------------------------------------------------------------
+# Secrets & credentials — never commit real values
+# Keep `.env.example` tracked as the empty/placeholder template only.
+.env.production
+.env.development
+.env.staging
+secrets/
+**/secrets/**
+*.keystore
+*credentials*.json
+*firebase-adminsdk*.json
+firebase-service-account.json
+google-services.json
+GoogleService-Info.plist
+id_rsa
+id_ed25519
+*.secret
