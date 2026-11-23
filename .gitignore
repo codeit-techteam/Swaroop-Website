@@ -6,30 +6,49 @@ node_modules
 out/
 build
 dist
-
-# Production
 *.tsbuildinfo
 next-env.d.ts
 
-# Debug
+# Production / debug
 npm-debug.log*
 
 # Environment — production secrets stay in Vercel / local .env only.
-# Never commit real .env, .env.local, or .env.production values.
+# Commit .env.example only.
 .env
 .env.*
 !.env.example
 !.env*.example
+*.env
+.envrc
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Credentials / keys
+*.pem
+*.key
+*.p12
+*.jks
+credentials.json
+*service-account*.json
+*serviceAccount*.json
+.secrets/
 
 # IDE / OS
-.idea
-.vscode
+.idea/
+.vscode/*
+!.vscode/extensions.json
 .DS_Store
+Thumbs.db
+*.swp
+*.swo
 
 # Misc
-*.pem
 .vercel
-
-# Sanity local cache / studio artifacts
 .sanity/
 dist/static/
+tmp/
+artifacts/
+coverage/
+*.log
